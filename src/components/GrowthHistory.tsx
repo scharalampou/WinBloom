@@ -85,7 +85,7 @@ export function GrowthHistory() {
     setIsClient(true);
     // Use mock data for demonstration, generating data for the last 10 days
     const mockLogs = generateMockLogs(10);
-    setLogs(mockLogs.sort((a, b) => parseISO(b.date).getTime() - parseISO(a).date.getTime()));
+    setLogs(mockLogs.sort((a, b) => parseISO(b.date).getTime() - parseISO(a.date).getTime()));
     
     // Previous localStorage logic:
     // try {
@@ -180,7 +180,7 @@ export function GrowthHistory() {
               </h3>
               
               {'empty' in entries ? (
-                 <Card className="dark:border-border/20 border-dashed dark:bg-card/50 dark:border-[#485971]">
+                 <Card className="dark:border-[#485971] border-dashed dark:bg-card/50">
                     <CardContent className="p-6 text-center flex flex-col items-center gap-4">
                         <Leaf className="size-8 text-primary/50" />
                         <p className="text-muted-foreground italic">
