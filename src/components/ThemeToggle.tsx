@@ -26,7 +26,7 @@ export function ThemeToggle() {
         size="icon"
         onClick={() => setTheme('light')}
         aria-label="Switch to light mode"
-        className={cn("btn-touch rounded-full")}
+        className={cn("btn-touch rounded-full", theme === 'light' && 'bg-primary text-primary-foreground')}
       >
         <Sun className="h-6 w-6" />
       </Button>
