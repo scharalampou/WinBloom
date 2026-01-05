@@ -1,9 +1,10 @@
+
 "use client";
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Sparkles, Flower2, History } from 'lucide-react';
+import { Sparkles, Flower2, History, Loader2 } from 'lucide-react';
 import { format } from '@/lib/utils';
 import type { WinLog } from '@/app/lib/types';
 import { Button } from './ui/button';
@@ -14,6 +15,7 @@ export function GrowthHistory() {
   const [logs, setLogs] = useState<WinLog[]>([]);
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
   const [isClient, setIsClient] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
@@ -28,7 +30,12 @@ export function GrowthHistory() {
   }, []);
 
   const handleLoadMore = () => {
-    setVisibleCount(prevCount => prevCount + ITEMS_PER_PAGE);
+    setIsLoadingMore(true);
+    // Simulate a network request
+    setTimeout(() => {
+      setVisibleCount(prevCount => prevCount + ITEMS_PER_PAGE);
+      setIsLoadingMore(false);
+    }, 500);
   };
   
   const visibleLogs = logs.slice(0, visibleCount);
@@ -68,8 +75,9 @@ export function GrowthHistory() {
           </div>
           {isClient && logs.length > visibleCount && (
             <div className="mt-6 text-center">
-              <Button onClick={handleLoadMore} variant="outline">
-                Load More
+              <Button onClick={handleLoadMore} disabled={isLoadingMore}>
+                {isLoadingMore && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                {isLoadingMore ? 'Loading...' : 'Load More'}
               </Button>
             </div>
           )}
