@@ -5,7 +5,7 @@ import { useState, useEffect, useTransition, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { Award, Droplets, Flower2, Loader2, Sparkles, Sprout, Wand2 } from 'lucide-react';
+import { Award, Droplets, Flower2, Loader2, Sparkles, Sprout } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
@@ -161,7 +161,7 @@ export function WinBloomDashboard() {
                             {isPending && suggestionTarget === 'win' ? (
                               <Loader2 className="h-4 w-4 animate-spin" />
                             ) : (
-                              <Wand2 className="h-4 w-4 text-primary group-hover:text-primary-foreground" />
+                              <Sparkles className="h-4 w-4 text-primary group-hover:text-primary-foreground" />
                             )}
                             <span className="ml-1 hidden sm:inline">Suggest</span>
                           </Button>
@@ -190,7 +190,7 @@ export function WinBloomDashboard() {
                             {isPending && suggestionTarget === 'gratitude' ? (
                               <Loader2 className="h-4 w-4 animate-spin" />
                             ) : (
-                              <Wand2 className="h-4 w-4 text-primary group-hover:text-primary-foreground" />
+                              <Sparkles className="h-4 w-4 text-primary group-hover:text-primary-foreground" />
                             )}
                             <span className="ml-1 hidden sm:inline">Suggest</span>
                           </Button>
@@ -299,3 +299,5 @@ export function WinBloomDashboard() {
     </div>
   );
 }
+
+    
