@@ -153,7 +153,7 @@ export function WinBloomDashboard() {
                 <CardTitle className="font-headline">Dewdrop Balance</CardTitle>
                 <CardDescription>Earn 10 Dewdrops every time you Log your Growth!</CardDescription>
               </div>
-              <div className="flex items-center gap-2 text-4xl font-bold text-primary">
+              <div className="flex items-center gap-2 text-4xl font-bold text-primary dark:text-accent">
                 <Droplets className="size-8" />
                 <span>{isClient ? dewdrops : 0}</span>
               </div>
