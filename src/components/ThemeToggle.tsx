@@ -20,22 +20,22 @@ export function ThemeToggle() {
   }
 
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-2 bg-secondary rounded-full p-1">
       <Button
-        variant={theme === 'light' ? 'secondary' : 'ghost'}
+        variant={theme === 'light' ? 'primary' : 'ghost'}
         size="icon"
         onClick={() => setTheme('light')}
         aria-label="Switch to light mode"
-        className={cn("btn-touch")}
+        className={cn("btn-touch rounded-full")}
       >
         <Sun className="h-6 w-6" />
       </Button>
       <Button
-        variant={theme === 'dark' ? 'secondary' : 'ghost'}
+        variant={theme === 'dark' ? 'primary' : 'ghost'}
         size="icon"
         onClick={() => setTheme('dark')}
         aria-label="Switch to dark mode"
-        className={cn("btn-touch")}
+        className={cn("btn-touch rounded-full", theme === 'dark' && 'bg-primary/80 text-primary-foreground')}
       >
         <Moon className="h-6 w-6" />
       </Button>

@@ -20,7 +20,7 @@ export function DailyInspiration() {
   }, []);
 
   return (
-    <Card className="bg-primary text-primary-foreground">
+    <Card className="text-primary-foreground border-none bg-gradient-to-r from-primary to-accent">
       <CardContent className="p-4 relative text-center">
         <div className="text-center">
           <p className="font-headline text-lg mb-2 font-bold">Daily Inspiration</p>

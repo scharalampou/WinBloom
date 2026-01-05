@@ -175,12 +175,12 @@ export function WinBloomDashboard() {
                             onClick={() => handleShuffle('win')} 
                             disabled={isPending} 
                             aria-label="Suggest a win"
-                            className="h-9 px-3 rounded-md border border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground group"
+                            className="h-9 px-3 rounded-md border-none bg-accent/20 text-accent-foreground hover:bg-accent/40"
                           >
                             {isPending && suggestionTarget === 'win' ? (
                               <Loader2 className="h-4 w-4 animate-spin" />
                             ) : (
-                              <Sparkles className="h-4 w-4 text-primary group-hover:text-primary-foreground" />
+                              <Sparkles className="h-4 w-4 text-accent" />
                             )}
                             <span className="ml-1 hidden sm:inline">Suggest</span>
                           </Button>
@@ -207,12 +207,12 @@ export function WinBloomDashboard() {
                             onClick={() => handleShuffle('gratitude')} 
                             disabled={isPending} 
                             aria-label="Suggest a gratitude"
-                            className="h-9 px-3 rounded-md border border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground group"
+                             className="h-9 px-3 rounded-md border-none bg-accent/20 text-accent-foreground hover:bg-accent/40"
                           >
                             {isPending && suggestionTarget === 'gratitude' ? (
                               <Loader2 className="h-4 w-4 animate-spin" />
                             ) : (
-                              <Sparkles className="h-4 w-4 text-primary group-hover:text-primary-foreground" />
+                              <Sparkles className="h-4 w-4 text-accent" />
                             )}
                             <span className="ml-1 hidden sm:inline">Suggest</span>
                           </Button>
@@ -225,7 +225,7 @@ export function WinBloomDashboard() {
                     )}
                   />
                   <div className="flex flex-col sm:flex-row gap-2">
-                    <Button type="submit" className="w-full font-bold bg-primary text-white hover:bg-primary/90" disabled={!form.formState.isValid}>Log Your Growth</Button>
+                    <Button type="submit" className={cn("w-full font-bold text-white", !form.formState.isValid && "bg-primary/50 text-primary-foreground/70")} disabled={!form.formState.isValid}>Log Your Growth</Button>
                   </div>
                 </form>
               </Form>
@@ -237,7 +237,7 @@ export function WinBloomDashboard() {
             <CardTitle className="font-headline">Your Digital Garden</CardTitle>
             <CardDescription>Watch your garden grow with every win you log.</CardDescription>
           </CardHeader>
-          <CardContent className="flex-grow flex flex-col items-center justify-center p-4 md:p-6 bg-muted/30 rounded-b-lg">
+          <CardContent className="flex-grow flex flex-col items-center justify-center p-4 md:p-6 bg-accent/10 rounded-b-lg border-2 border-dashed border-accent/30">
             {!isClient ? (
               <div className="flex items-center justify-center flex-grow">
                 <Loader2 className="animate-spin text-primary" />
@@ -248,14 +248,14 @@ export function WinBloomDashboard() {
                 <div className="flex flex-col items-center justify-center gap-4 text-center flex-grow">
                   {logs.length === 0 ? (
                     <>
-                      <Sprout className="text-primary/70" size={64} />
+                      <Sprout className="text-accent" size={64} />
                       <p className="text-center text-lg italic font-medium text-muted-foreground max-w-xs">
                         Existing is a full-time job. Rest is productive, too.
                       </p>
                     </>
                   ) : (
                     <>
-                      <Sprout className="text-primary" size={80} />
+                      <Sprout className="text-accent" size={80} />
                        <p className="text-center text-lg italic font-medium text-muted-foreground max-w-xs mt-2">
                         Just {dewdropsForNextFlower} more Dewdrops to go until your next flower!
                       </p>
@@ -290,7 +290,3 @@ export function WinBloomDashboard() {
     </div>
   );
 }
-
-    
-
-    
