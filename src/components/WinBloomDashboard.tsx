@@ -180,9 +180,9 @@ export function WinBloomDashboard() {
                                     }}
                                 >
                                     {i < 6 ? (
-                                        <Droplets className={cn("size-4", i < currentProgressSteps ? 'text-primary-foreground' : 'text-muted-foreground')} />
+                                        <Droplets className={cn("size-5", i < currentProgressSteps ? 'text-primary-foreground' : 'text-muted-foreground')} />
                                     ) : (
-                                      <span className={cn("text-xl", i < currentProgressSteps ? '' : '')}>🌸</span>
+                                      <span className={cn("text-2xl", i < currentProgressSteps ? '' : '')}>🌸</span>
                                     )}
                                 </div>
                             ))}
