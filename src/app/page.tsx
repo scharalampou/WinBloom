@@ -20,7 +20,6 @@ export default function Home() {
             </TabsContent>
             <TabsContent value="history" className="mt-6 space-y-6">
               <GrowthHistory />
-              <DailyInspiration />
             </TabsContent>
             <TabsContent value="global" className="mt-6 space-y-6">
               <GlobalFeed />
