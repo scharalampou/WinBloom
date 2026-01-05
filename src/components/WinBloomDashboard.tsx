@@ -166,7 +166,7 @@ export function WinBloomDashboard() {
                     render={({ field }) => (
                       <FormItem>
                         <div className="flex justify-between items-center">
-                          <FormLabel className="flex items-center gap-2 font-bold text-sm md:text-base">
+                          <FormLabel className="flex items-center gap-2 font-medium text-sm md:text-base">
                             <span>🎉</span>
                             Today's Win
                           </FormLabel>
@@ -198,7 +198,7 @@ export function WinBloomDashboard() {
                     render={({ field }) => (
                       <FormItem>
                          <div className="flex justify-between items-center">
-                          <FormLabel className="flex items-center gap-2 font-bold text-sm md:text-base">
+                          <FormLabel className="flex items-center gap-2 font-medium text-sm md:text-base">
                             <span>🌸</span>
                             Today's Gratitude
                           </FormLabel>
@@ -225,7 +225,7 @@ export function WinBloomDashboard() {
                     )}
                   />
                   <div className="flex flex-col sm:flex-row gap-2">
-                    <Button type="submit" className={cn("w-full font-bold text-white", !form.formState.isValid && "bg-primary/50 text-white")} disabled={!form.formState.isValid}>Log Your Growth</Button>
+                    <Button type="submit" className={cn("w-full font-bold text-white", !form.formState.isValid && "bg-primary/50 text-white/80")} disabled={!form.formState.isValid}>Log Your Growth</Button>
                   </div>
                 </form>
               </Form>
