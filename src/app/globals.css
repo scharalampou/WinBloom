@@ -43,8 +43,8 @@
     --accent-foreground: 240 10% 3.9%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 220 13% 91%;
-    --input: 220 25% 98%;
+    --border: 224 71% 91%;
+    --input: 220 13% 91%;
     --ring: 338 80% 58%;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
@@ -95,6 +95,6 @@
 
 @layer components {
   .btn-touch {
-    @apply min-w-[44px] min-h-[44px];
+    @apply min-h-[44px] min-w-[44px];
   }
 }
