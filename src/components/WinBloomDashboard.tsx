@@ -166,7 +166,7 @@ export function WinBloomDashboard() {
                     render={({ field }) => (
                       <FormItem>
                         <div className="flex justify-between items-center">
-                          <FormLabel className="flex items-center gap-2 font-medium text-sm md:text-base">
+                          <FormLabel className="flex items-center gap-2 font-semibold text-sm md:text-base">
                             <span>🎉</span>
                             Today's Win
                           </FormLabel>
@@ -198,7 +198,7 @@ export function WinBloomDashboard() {
                     render={({ field }) => (
                       <FormItem>
                          <div className="flex justify-between items-center">
-                          <FormLabel className="flex items-center gap-2 font-medium text-sm md:text-base">
+                          <FormLabel className="flex items-center gap-2 font-semibold text-sm md:text-base">
                             <span>🌸</span>
                             Today's Gratitude
                           </FormLabel>
