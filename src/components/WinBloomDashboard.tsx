@@ -18,6 +18,7 @@ import { cn, format } from '@/lib/utils';
 import { ScrollArea } from './ui/scroll-area';
 import { DailyInspiration } from './DailyInspiration';
 import { Progress } from './ui/progress';
+import { ConfettiBurst } from './Confetti';
 
 const formSchema = z.object({
   win: z.string().min(3, "Your win needs a bit more detail!"),
@@ -41,6 +42,7 @@ export function WinBloomDashboard() {
   const { toast } = useToast();
   const [lastFlowerToast, setLastFlowerToast] = useState(0);
   const [suggestionTarget, setSuggestionTarget] = useState<SuggestionField | null>(null);
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -118,10 +120,14 @@ export function WinBloomDashboard() {
       title: 'Look at you adulting like a pro!',
       description: 'You\'ve earned 10 dewdrops!',
     });
+    
+    setShowConfetti(true);
+    setTimeout(() => setShowConfetti(false), 4000);
   }
 
   return (
     <div className="space-y-6">
+      {isClient && showConfetti && <ConfettiBurst />}
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         <div className="lg:col-span-2 space-y-6">
           <Card>
@@ -203,7 +209,7 @@ export function WinBloomDashboard() {
                     )}
                   />
                   <div className="flex flex-col sm:flex-row gap-2">
-                    <Button type="submit" className="w-full font-bold" disabled={!form.formState.isValid}>Log Your Growth</Button>
+                    <Button type="submit" className="w-full font-bold bg-primary text-primary-foreground hover:bg-primary/90" disabled={!form.formState.isValid}>Log Your Growth</Button>
                   </div>
                 </form>
               </Form>
@@ -299,7 +305,3 @@ export function WinBloomDashboard() {
     </div>
   );
 }
-
-    
-
-    
