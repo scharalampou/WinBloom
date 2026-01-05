@@ -23,7 +23,7 @@ export default function Home() {
             </TabsTrigger>
             <TabsTrigger value="history">
               <History className="mr-2 h-4 w-4" />
-              Your Growth
+              My Growth
             </TabsTrigger>
             <TabsTrigger value="global">
               <Users className="mr-2 h-4 w-4" />
