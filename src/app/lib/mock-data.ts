@@ -1,4 +1,24 @@
-export const exampleWins: string[] = [
+
+export type ExampleWin = {
+  user: string;
+  win: string;
+  flowers: number;
+};
+
+const wittyUsers: string[] = [
+  "A fellow gardener",
+  "A blooming soul",
+  "A persistent sprout",
+  "A happy plant parent",
+  "A dewdrop collector",
+  "A sunshine seeker",
+  "A growth enthusiast",
+  "A quiet achiever",
+  "A patient bloomer",
+  "A cultivator of joy",
+];
+
+const wins: string[] = [
   "Successfully assembled IKEA furniture without leftover screws.",
   "Remembered to water all the plants before they staged a protest.",
   "Parallel parked on a busy street in one go. Nailed it.",
@@ -20,3 +40,9 @@ export const exampleWins: string[] = [
   "Didn't hit snooze this morning. A modern miracle.",
   "My pet did something hilarious and I caught it on camera."
 ];
+
+export const exampleWins: ExampleWin[] = wins.map((win) => ({
+  win,
+  user: wittyUsers[Math.floor(Math.random() * wittyUsers.length)],
+  flowers: Math.floor(Math.random() * 50) + 1, // Random number of flowers from 1 to 50
+}));

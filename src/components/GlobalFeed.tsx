@@ -1,8 +1,18 @@
+
+"use client";
+
 import { exampleWins } from '@/app/lib/mock-data';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Sparkles } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import { Sparkles, Flower2 } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export function GlobalFeed() {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <div className="space-y-6">
       <div className="text-center space-y-2 max-w-2xl mx-auto">
@@ -12,19 +22,25 @@ export function GlobalFeed() {
         </p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {exampleWins.map((win, index) => (
+        {isClient && exampleWins.map((item, index) => (
           <Card key={index} className="flex flex-col transition-transform duration-300 hover:-translate-y-1">
             <CardHeader>
               <CardTitle className="flex items-center gap-3">
                 <span className="bg-secondary p-2 rounded-full">
                   <Sparkles className="text-primary/80" size={20} />
                 </span>
-                <span className="text-base font-body pt-1 font-medium text-muted-foreground">Anonymous User</span>
+                <span className="text-base font-body pt-1 font-medium text-muted-foreground">{item.user}</span>
               </CardTitle>
             </CardHeader>
             <CardContent className="flex-grow">
-              <p className="text-card-foreground italic">"{win}"</p>
+              <p className="text-card-foreground italic">"{item.win}"</p>
             </CardContent>
+            <CardFooter>
+              <div className="text-xs text-muted-foreground font-medium flex items-center gap-2">
+                <Flower2 className="text-accent/80" size={16} />
+                <span>{item.flowers} flowers bloomed</span>
+              </div>
+            </CardFooter>
           </Card>
         ))}
       </div>
