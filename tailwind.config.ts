@@ -16,6 +16,9 @@ export default {
       },
     },
     extend: {
+      lineHeight: {
+        'relaxed': '1.6',
+      },
       fontFamily: {
         body: ['PT Sans', 'sans-serif'],
         headline: ['Frank Ruhl Libre', 'serif'],

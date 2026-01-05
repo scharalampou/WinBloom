@@ -4,6 +4,7 @@ import * as React from "react"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
@@ -15,7 +16,7 @@ export function ThemeToggle() {
   
   if (!mounted) {
     // Render a placeholder or null on the server and initial client render
-    return <div className="flex items-center space-x-2 h-9 w-20" />;
+    return <div className="flex items-center space-x-2 h-11 w-24" />;
   }
 
   return (
@@ -25,6 +26,7 @@ export function ThemeToggle() {
         size="icon"
         onClick={() => setTheme('light')}
         aria-label="Switch to light mode"
+        className={cn("btn-touch")}
       >
         <Sun className="h-6 w-6" />
       </Button>
@@ -33,6 +35,7 @@ export function ThemeToggle() {
         size="icon"
         onClick={() => setTheme('dark')}
         aria-label="Switch to dark mode"
+        className={cn("btn-touch")}
       >
         <Moon className="h-6 w-6" />
       </Button>
