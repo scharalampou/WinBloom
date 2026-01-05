@@ -161,7 +161,7 @@ export function WinBloomDashboard() {
               </div>
             </CardHeader>
             <CardContent>
-              {isClient ? (
+            {isClient ? (
                 <div className="space-y-2 pt-2">
                     <div className="relative w-full h-8 flex items-center">
                         <Progress value={progressToNextFlower} className="h-2" indicatorClassName={theme === 'light' ? 'bg-[#3D8E73]' : ''} />
@@ -173,10 +173,6 @@ export function WinBloomDashboard() {
                                         "h-8 w-8 rounded-full flex items-center justify-center bg-secondary transition-colors duration-500",
                                         i < currentProgressSteps ? (theme === 'light' ? 'bg-[#3D8E73]' : 'bg-primary') : 'bg-muted'
                                     )}
-                                    style={{
-                                        transform: 'translateX(-50%)',
-                                        left: `${(i / 6) * 100}%`
-                                    }}
                                 >
                                     {i < 6 ? (
                                         <Droplets className={cn("size-5", i < currentProgressSteps ? 'text-primary-foreground' : 'text-muted-foreground')} />
@@ -187,7 +183,7 @@ export function WinBloomDashboard() {
                             ))}
                         </div>
                     </div>
-                     <p className="text-sm font-medium text-muted-foreground pt-2">
+                     <p className="text-sm font-medium text-muted-foreground pt-2 text-center">
                         Your progress to the next flower!
                     </p>
                 </div>
@@ -372,3 +368,4 @@ export function WinBloomDashboard() {
     
 
     
+
