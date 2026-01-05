@@ -18,19 +18,11 @@ import { cn, format } from '@/lib/utils';
 import { ScrollArea } from './ui/scroll-area';
 import { DailyInspiration } from './DailyInspiration';
 import { Progress } from './ui/progress';
-import { ConfettiBurst } from './Confetti';
 
 const formSchema = z.object({
   win: z.string().min(3, "Your win needs a bit more detail!"),
   gratitude: z.string().min(3, "Please share a little more about your gratitude."),
 });
-
-const flowerColors = [
-  "text-pink-500", "text-rose-500", "text-red-500", "text-orange-500",
-  "text-yellow-400", "text-lime-400", "text-green-500", "text-emerald-500",
-  "text-teal-500", "text-cyan-500", "text-sky-500", "text-blue-500",
-  "text-indigo-500", "text-violet-500", "text-purple-500", "text-fuchsia-500",
-];
 
 type SuggestionField = 'win' | 'gratitude';
 
@@ -42,7 +34,6 @@ export function WinBloomDashboard() {
   const { toast } = useToast();
   const [lastFlowerToast, setLastFlowerToast] = useState(0);
   const [suggestionTarget, setSuggestionTarget] = useState<SuggestionField | null>(null);
-  const [showConfetti, setShowConfetti] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -130,13 +121,10 @@ export function WinBloomDashboard() {
       ),
       description: 'You\'ve earned 10 dewdrops!',
     });
-    setShowConfetti(true);
-    setTimeout(() => setShowConfetti(false), 4000);
   }
 
   return (
     <div className="space-y-6">
-      {showConfetti && <ConfettiBurst />}
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         <div className="lg:col-span-2 space-y-6">
           <Card>
@@ -294,7 +282,7 @@ export function WinBloomDashboard() {
                       {Array.from({ length: flowerCount }).map((_, i) => (
                         <div key={i} className="flex justify-center">
                           <Flower2
-                            className={cn("animate-bloom", flowerColors[i % flowerColors.length])}
+                            className="animate-bloom text-accent"
                             style={{ animationDelay: `${i * 100}ms` }}
                             size={40}
                           />
@@ -312,4 +300,3 @@ export function WinBloomDashboard() {
     </div>
   );
 }
-
