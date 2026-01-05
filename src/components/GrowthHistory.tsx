@@ -4,7 +4,7 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Sparkles, Flower, History, Loader2 } from 'lucide-react';
+import { Award, Flower, History, Loader2 } from 'lucide-react';
 import { format } from '@/lib/utils';
 import type { WinLog } from '@/app/lib/types';
 import { Button } from './ui/button';
@@ -55,7 +55,7 @@ export function GrowthHistory() {
               visibleLogs.map(log => (
                 <div key={log.id} className="p-4 rounded-md border bg-[#F7F4E6] border-[#F0EDDE] text-[#555555]">
                   <p className="text-sm font-semibold flex items-start gap-2">
-                    <Sparkles className="size-4 text-accent mt-0.5 shrink-0" />
+                    <Award className="size-4 text-accent mt-0.5 shrink-0" />
                     <span className="flex-1">Win: <span className="font-normal">{log.win}</span></span>
                   </p>
                   <p className="text-sm font-semibold flex items-start gap-2 mt-2">

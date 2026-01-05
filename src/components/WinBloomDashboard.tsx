@@ -167,7 +167,7 @@ export function WinBloomDashboard() {
                       <FormItem>
                         <div className="flex justify-between items-center">
                           <FormLabel className="flex items-center gap-2 font-bold text-sm md:text-base">
-                            <Sparkles className="text-accent" />
+                            <Award className="text-accent" />
                             Today's Win
                           </FormLabel>
                           <Button 
