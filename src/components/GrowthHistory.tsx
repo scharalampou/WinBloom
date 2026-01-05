@@ -3,18 +3,17 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import type { WinLog } from '@/app/lib/types';
-import { Button } from './ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { History, Loader2, Trophy, Heart } from 'lucide-react';
+import { Loader2, History } from 'lucide-react';
 import {
   format,
   isToday,
   isYesterday,
   isThisWeek,
   parseISO,
+  subDays,
   startOfToday,
-  startOfYesterday,
-  startOfWeek
+  startOfWeek,
 } from 'date-fns';
 
 const encouragingMessages = [
@@ -25,20 +24,68 @@ const encouragingMessages = [
   "Existing is a full-time job. You're doing great just being here.",
 ];
 
+// Mock wins and gratitudes for demonstration
+const mockWins = [
+    "Finished a book I've been reading for months.",
+    "Cooked a new recipe and it was delicious.",
+    "Went for a long walk and enjoyed the fresh air.",
+    "Organized my desk and feel much more productive.",
+    "Finally called that friend I've been meaning to.",
+    "Woke up without hitting the snooze button.",
+    "Fixed that wobbly chair that's been bugging me.",
+    "Learned a new chord on the guitar.",
+    "Made a stranger smile at the grocery store.",
+    "Drank enough water today."
+];
+
+const mockGratitudes = [
+    "Grateful for the quiet morning.",
+    "Thankful for the sound of rain.",
+    "Appreciated the taste of my favorite tea.",
+    "Grateful for a cozy bed.",
+    "Thankful for finding my lost keys.",
+    "Appreciated a funny video that made me laugh.",
+    "Grateful for my favorite song coming on shuffle.",
+    "Thankful for the support of my family.",
+    "Appreciated the sunset.",
+    "Grateful for a productive day."
+];
+
+const generateMockLogs = (count: number): WinLog[] => {
+  const logs: WinLog[] = [];
+  const today = new Date();
+  for (let i = 0; i < count; i++) {
+    const date = subDays(today, i);
+    logs.push({
+      id: `${i}`,
+      win: mockWins[i % mockWins.length],
+      gratitude: mockGratitudes[i % mockGratitudes.length],
+      date: date.toISOString(),
+    });
+  }
+  return logs;
+};
+
+
 export function GrowthHistory() {
   const [logs, setLogs] = useState<WinLog[]>([]);
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
-    try {
-      const savedLogs = localStorage.getItem('winbloom-logs');
-      if (savedLogs) {
-        setLogs(JSON.parse(savedLogs).sort((a: WinLog, b: WinLog) => parseISO(b.date).getTime() - parseISO(a.date).getTime()));
-      }
-    } catch (error) {
-      console.error("Failed to parse from localStorage", error);
-    }
+    // Use mock data for demonstration
+    const mockLogs = generateMockLogs(10);
+    setLogs(mockLogs.sort((a, b) => parseISO(b.date).getTime() - parseISO(a.date).getTime()));
+    
+    // Previous localStorage logic:
+    // try {
+    //   const savedLogs = localStorage.getItem('winbloom-logs');
+    //   if (savedLogs) {
+    //     setLogs(JSON.parse(savedLogs).sort((a: WinLog, b: WinLog) => parseISO(b.date).getTime() - parseISO(a.date).getTime()));
+    //   }
+    // } catch (error) {
+    //   console.error("Failed to parse from localStorage", error);
+    // }
   }, []);
 
   const groupedLogs = useMemo(() => {
@@ -55,25 +102,29 @@ export function GrowthHistory() {
     });
 
     const today = startOfToday();
-    const yesterday = startOfYesterday();
     const startOfCurrentWeek = startOfWeek(today, { weekStartsOn: 1 });
 
     const filledGroups: Record<string, WinLog[] | { empty: true }> = {};
     if (logs.length > 0) {
       let currentDate = today;
-      const oldestDate = parseISO(logs[logs.length - 1].date);
+      // Go back 10 days for the mock view
+      const oldestDate = subDays(today, 9);
       
+      let emptyCounter = 0;
       while (currentDate >= oldestDate) {
         const dateKey = format(currentDate, 'yyyy-MM-dd');
         if (groups[dateKey]) {
           filledGroups[dateKey] = groups[dateKey];
-        } else if (isToday(currentDate) || isYesterday(currentDate) || currentDate >= startOfCurrentWeek) {
-          filledGroups[dateKey] = { empty: true };
+        } else {
+           // Only show empty states for recent dates to avoid clutter
+           if (isToday(currentDate) || isYesterday(currentDate) || currentDate >= startOfCurrentWeek) {
+            filledGroups[dateKey] = { empty: true, messageIndex: emptyCounter++ };
+           }
         }
-        currentDate = new Date(currentDate.setDate(currentDate.getDate() - 1));
+        currentDate = subDays(currentDate, 1);
       }
       
-      // Add any remaining older groups
+      // Add any remaining older groups that might be outside the 10-day window
       Object.keys(groups).forEach(dateKey => {
         if (!filledGroups[dateKey]) {
           filledGroups[dateKey] = groups[dateKey];
@@ -82,7 +133,16 @@ export function GrowthHistory() {
 
     }
 
-    return filledGroups;
+    // Create a sorted array of keys to ensure chronological order
+    const sortedKeys = Object.keys(filledGroups).sort((a, b) => parseISO(b).getTime() - parseISO(a).getTime());
+    
+    const orderedFilledGroups: Record<string, WinLog[] | { empty: true; messageIndex: number; }> = {};
+    sortedKeys.forEach(key => {
+        orderedFilledGroups[key] = filledGroups[key] as WinLog[] | { empty: true; messageIndex: number; };
+    });
+
+
+    return orderedFilledGroups;
 
   }, [logs, isClient]);
 
@@ -105,7 +165,7 @@ export function GrowthHistory() {
 
       <div className="space-y-8">
         {isClient && Object.keys(groupedLogs).length > 0 ? (
-          Object.entries(groupedLogs).map(([dateKey, entries], index) => (
+          Object.entries(groupedLogs).map(([dateKey, entries]) => (
             <div key={dateKey} className="space-y-4">
               <h3 className="text-xl md:text-2xl font-bold font-headline text-foreground/90">
                 {getGroupTitle(dateKey)}
@@ -115,7 +175,7 @@ export function GrowthHistory() {
                  <Card className="dark:border-border/20 border-dashed dark:bg-card/50">
                     <CardContent className="p-6 text-center">
                         <p className="text-muted-foreground italic">
-                            {encouragingMessages[index % encouragingMessages.length]}
+                            {encouragingMessages[entries.messageIndex % encouragingMessages.length]}
                         </p>
                     </CardContent>
                  </Card>
