@@ -5,7 +5,7 @@ import { useState, useEffect, useTransition, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { Droplets, Flower2, Loader2, Shuffle, Sparkles, Sprout } from 'lucide-react';
+import { Droplets, Flower2, Loader2, Sparkles, Sprout, Wand2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
@@ -148,14 +148,6 @@ export function WinBloomDashboard() {
                     <FormItem>
                       <div className="flex justify-between items-center">
                         <FormLabel>Today's Win</FormLabel>
-                        <Button type="button" variant="ghost" size="sm" onClick={handleShuffle} disabled={isPending} aria-label="Suggest a win">
-                          {isPending ? (
-                            <Loader2 className="h-4 w-4 animate-spin" />
-                          ) : (
-                            <Shuffle className="h-4 w-4" />
-                          )}
-                          <span className="ml-2 hidden sm:inline">Suggest</span>
-                        </Button>
                       </div>
                       <FormControl>
                         <Textarea placeholder="Found matching socks..." {...field} />
@@ -177,7 +169,17 @@ export function WinBloomDashboard() {
                     </FormItem>
                   )}
                 />
+                <div className="flex flex-col sm:flex-row gap-2">
                 <Button type="submit" className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-bold" disabled={!form.formState.isValid}>Log Your Growth</Button>
+                <Button type="button" size="sm" onClick={handleShuffle} disabled={isPending} aria-label="Suggest a win" className="bg-accent text-accent-foreground hover:bg-accent/90">
+                  {isPending ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Wand2 className="h-4 w-4" />
+                  )}
+                  <span className="ml-2">Suggestions...</span>
+                </Button>
+                </div>
               </form>
             </Form>
           </CardContent>
