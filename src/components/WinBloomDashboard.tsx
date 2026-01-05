@@ -17,6 +17,7 @@ import type { WinLog } from '@/app/lib/types';
 import { cn, format } from '@/lib/utils';
 import { ScrollArea } from './ui/scroll-area';
 import { Progress } from './ui/progress';
+import { DailyInspiration } from './DailyInspiration';
 
 const formSchema = z.object({
   win: z.string().min(3, "Your win needs a bit more detail!"),
@@ -165,7 +166,10 @@ export function WinBloomDashboard() {
                     render={({ field }) => (
                       <FormItem>
                         <div className="flex justify-between items-center">
-                          <FormLabel className="font-bold text-sm md:text-base">Today's Win</FormLabel>
+                          <FormLabel className="flex items-center gap-2 font-bold text-sm md:text-base">
+                            <Sparkles className="text-accent" />
+                            Today's Win
+                          </FormLabel>
                           <Button 
                             type="button" 
                             onClick={() => handleShuffle('win')} 
@@ -194,7 +198,10 @@ export function WinBloomDashboard() {
                     render={({ field }) => (
                       <FormItem>
                          <div className="flex justify-between items-center">
-                          <FormLabel className="font-bold text-sm md:text-base">Today's Gratitude</FormLabel>
+                          <FormLabel className="flex items-center gap-2 font-bold text-sm md:text-base">
+                            <Flower2 className="text-primary" />
+                            Today's Gratitude
+                          </FormLabel>
                           <Button 
                             type="button" 
                             onClick={() => handleShuffle('gratitude')} 
@@ -282,3 +289,5 @@ export function WinBloomDashboard() {
     </div>
   );
 }
+
+    
