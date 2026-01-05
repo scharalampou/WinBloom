@@ -56,8 +56,8 @@ export function GrowthHistory() {
                 <div key={log.id} className="p-4 rounded-lg border bg-card text-card-foreground">
                   <div className="space-y-2">
                     <p className="text-sm flex items-start gap-2">
-                      <Trophy className="h-5 w-5 text-primary mt-0.5 shrink-0" />
-                      <span className="flex-1"><span className="font-semibold text-primary">Win: </span>{log.win}</span>
+                      <Trophy className="h-5 w-5 text-emerald-600 dark:text-primary mt-0.5 shrink-0" />
+                      <span className="flex-1"><span className="font-semibold text-emerald-600 dark:text-primary">Win: </span>{log.win}</span>
                     </p>
                     <p className="text-sm flex items-start gap-2">
                       <Heart className="h-5 w-5 text-orange-600 dark:text-accent mt-0.5 shrink-0" />
@@ -77,7 +77,7 @@ export function GrowthHistory() {
           </div>
           {isClient && logs.length > visibleCount && (
             <div className="mt-6 text-center">
-              <Button onClick={handleLoadMore} disabled={isLoadingMore}>
+              <Button onClick={handleLoadMore} disabled={isLoadingMore} className="font-semibold">
                 {isLoadingMore ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 ) : (
