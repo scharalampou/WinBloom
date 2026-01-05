@@ -222,12 +222,12 @@ export function WinBloomDashboard() {
                             onClick={() => handleShuffle('win')} 
                             disabled={isPending} 
                             aria-label="Suggest a win"
-                            className="h-9 px-3 rounded-md border-none"
+                            className="h-9 px-3 rounded-md border-none bg-[#EA3E7D] text-white hover:bg-[#EA3E7D]/90 dark:bg-secondary dark:text-secondary-foreground dark:hover:bg-secondary/80"
                           >
                             {isPending && suggestionTarget === 'win' ? (
                               <Loader2 className="h-4 w-4 animate-spin" />
                             ) : (
-                              <Sparkles className="h-4 w-4 text-primary dark:text-accent" />
+                              <Sparkles className="h-4 w-4 text-white dark:text-accent" />
                             )}
                             <span className="ml-1 hidden sm:inline">Suggest</span>
                           </Button>
@@ -269,12 +269,12 @@ export function WinBloomDashboard() {
                             onClick={() => handleShuffle('gratitude')} 
                             disabled={isPending} 
                             aria-label="Suggest a gratitude"
-                             className="h-9 px-3 rounded-md border-none"
+                             className="h-9 px-3 rounded-md border-none bg-[#EA3E7D] text-white hover:bg-[#EA3E7D]/90 dark:bg-secondary dark:text-secondary-foreground dark:hover:bg-secondary/80"
                           >
                             {isPending && suggestionTarget === 'gratitude' ? (
                               <Loader2 className="h-4 w-4 animate-spin" />
                             ) : (
-                              <Sparkles className="h-4 w-4 text-primary dark:text-accent" />
+                              <Sparkles className="h-4 w-4 text-white dark:text-accent" />
                             )}
                             <span className="ml-1 hidden sm:inline">Suggest</span>
                           </Button>
@@ -314,11 +314,7 @@ export function WinBloomDashboard() {
             <CardDescription>Watch your garden grow with every win you log.</CardDescription>
           </CardHeader>
           <CardContent className="flex-grow flex flex-col items-center justify-center p-4 md:p-6 bg-accent/10 rounded-b-lg border-2 border-dashed border-accent/30 dark:bg-card">
-            {!isClient ? (
-              <div className="flex items-center justify-center flex-grow">
-                <Loader2 className="animate-spin text-primary" />
-              </div>
-            ) : (
+            {isClient ? (
               <div className="w-full flex flex-col items-center flex-grow">
                 
                 <div className="flex flex-col items-center justify-center gap-4 text-center flex-grow">
@@ -359,6 +355,10 @@ export function WinBloomDashboard() {
                   </>
                 )}
               </div>
+            ) : (
+              <div className="flex items-center justify-center flex-grow">
+                <Loader2 className="animate-spin text-primary" />
+              </div>
             )}
           </CardContent>
         </Card>
@@ -368,5 +368,7 @@ export function WinBloomDashboard() {
 }
 
   
+
+    
 
     
