@@ -174,7 +174,7 @@ export function WinBloomDashboard() {
                       <FormItem>
                         <div className="flex justify-between items-center">
                           <FormLabel className="flex items-center gap-2 font-semibold text-sm md:text-base">
-                            <span>🎉</span>
+                            <span>🏆</span>
                             Today's Win
                           </FormLabel>
                           <Button 
@@ -328,4 +328,5 @@ export function WinBloomDashboard() {
   );
 }
 
+    
     
