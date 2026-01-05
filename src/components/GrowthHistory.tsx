@@ -4,7 +4,7 @@
 import { useState, useEffect, useMemo, useTransition } from 'react';
 import type { WinLog } from '@/app/lib/types';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import { Loader2, Leaf } from 'lucide-react';
+import { Loader2, Leaf, Plus } from 'lucide-react';
 import {
   format,
   isToday,
@@ -243,14 +243,17 @@ export function GrowthHistory() {
 
         {isClient && dayEntries.length > visibleDays && (
           <div className="text-center">
-            <Button onClick={handleLoadMore} disabled={isPending}>
+            <Button onClick={handleLoadMore} disabled={isPending} className="font-semibold">
               {isPending ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Loading...
                 </>
               ) : (
-                'Load more entries'
+                <>
+                  <Plus className="mr-2 h-4 w-4" />
+                  Load more entries
+                </>
               )}
             </Button>
           </div>
