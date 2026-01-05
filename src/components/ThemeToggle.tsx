@@ -20,8 +20,8 @@ export function ThemeToggle() {
         checked={isDarkMode}
         onCheckedChange={toggleTheme}
         aria-label="Toggle theme"
-        checkedIcon={<Moon className="h-3 w-3 text-primary-foreground" />}
-        uncheckedIcon={<Sun className="h-3 w-3 text-accent-foreground" />}
+        checkedIcon={<Moon className="h-4 w-4 text-primary-foreground" />}
+        uncheckedIcon={<Sun className="h-4 w-4 text-accent-foreground" />}
       />
     </div>
   )
