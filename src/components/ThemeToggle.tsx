@@ -1,3 +1,4 @@
+
 "use client"
 
 import * as React from "react"
@@ -34,7 +35,7 @@ export function ThemeToggle() {
       className={cn(
         "btn-touch rounded-full h-11 w-11 transition-colors duration-300",
         isLight 
-          ? "bg-black text-white hover:bg-gray-800" 
+          ? "bg-black text-white hover:bg-gray-800 hover:text-gray-300" 
           : "bg-yellow-400 text-black hover:bg-yellow-500"
       )}
     >
