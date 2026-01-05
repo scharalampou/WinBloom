@@ -15,11 +15,11 @@ export default function Home() {
         </div>
         <Tabs defaultValue="garden" className="w-full">
           <TabsList className="grid w-full max-w-md mx-auto grid-cols-2">
-            <TabsTrigger value="garden">
+            <TabsTrigger value="garden" className="font-bold">
               <Sprout className="mr-2 h-4 w-4" />
               My Garden
             </TabsTrigger>
-            <TabsTrigger value="global">
+            <TabsTrigger value="global" className="font-bold">
               <Globe className="mr-2 h-4 w-4" />
               Global Bloom Feed
             </TabsTrigger>
