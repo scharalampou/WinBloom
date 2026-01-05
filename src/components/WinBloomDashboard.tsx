@@ -59,7 +59,7 @@ export function WinBloomDashboard() {
       if (savedDewdrops) {
         const parsedDewdrops = JSON.parse(savedDewdrops);
         setDewdrops(parsedDewdrops);
-        setLastFlowerToast(Math.floor(parsedDewdrops / 50) * 50);
+        setLastFlowerToast(Math.floor(parsedDewdrops / 70) * 70);
       }
       if (savedLogs) setLogs(JSON.parse(savedLogs));
     } catch (error) {
@@ -70,7 +70,7 @@ export function WinBloomDashboard() {
   useEffect(() => {
     if (isClient) {
       localStorage.setItem('winbloom-dewdrops', JSON.stringify(dewdrops));
-      const newFlowerMilestone = Math.floor(dewdrops / 50) * 50;
+      const newFlowerMilestone = Math.floor(dewdrops / 70) * 70;
       if (dewdrops > 0 && newFlowerMilestone > lastFlowerToast && newFlowerMilestone > 0) {
         toast({
           className: "bg-primary text-primary-foreground border-none",
@@ -94,9 +94,9 @@ export function WinBloomDashboard() {
     }
   }, [logs, isClient]);
   
-  const flowerCount = useMemo(() => isClient ? Math.floor(dewdrops / 50) : 0, [dewdrops, isClient]);
-  const dewdropsForNextFlower = useMemo(() => 50 - (dewdrops % 50), [dewdrops]);
-  const progressToNextFlower = useMemo(() => (50 - dewdropsForNextFlower) / 50 * 100, [dewdropsForNextFlower]);
+  const flowerCount = useMemo(() => isClient ? Math.floor(dewdrops / 70) : 0, [dewdrops, isClient]);
+  const dewdropsForNextFlower = useMemo(() => 70 - (dewdrops % 70), [dewdrops]);
+  const progressToNextFlower = useMemo(() => (70 - dewdropsForNextFlower) / 70 * 100, [dewdropsForNextFlower]);
 
   const handleShuffle = (field: SuggestionField) => {
     setSuggestionTarget(field);
