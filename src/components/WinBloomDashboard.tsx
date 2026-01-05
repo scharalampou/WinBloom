@@ -5,7 +5,7 @@ import { useState, useEffect, useTransition, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { Award, Droplets, Flower2, Loader2, Sparkles, Sprout } from 'lucide-react';
+import { Award, Droplets, Flower, Loader2, Sparkles, Sprout } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
@@ -199,7 +199,7 @@ export function WinBloomDashboard() {
                       <FormItem>
                          <div className="flex justify-between items-center">
                           <FormLabel className="flex items-center gap-2 font-bold text-sm md:text-base">
-                            <Flower2 className="text-primary" />
+                            <Flower className="text-primary" />
                             Today's Gratitude
                           </FormLabel>
                           <Button 
@@ -271,7 +271,7 @@ export function WinBloomDashboard() {
                     <div className="w-full grid grid-cols-7 gap-y-4 gap-x-2 items-center justify-center">
                       {Array.from({ length: flowerCount }).map((_, i) => (
                         <div key={i} className="flex justify-center">
-                          <Flower2
+                          <Flower
                             className="animate-bloom text-accent"
                             style={{ animationDelay: `${i * 100}ms` }}
                             size={40}

@@ -3,7 +3,7 @@
 
 import { exampleWins } from '@/app/lib/mock-data';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { Sparkles, Flower2 } from 'lucide-react';
+import { Sparkles, Flower } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export function GlobalFeed() {
@@ -37,7 +37,7 @@ export function GlobalFeed() {
             </CardContent>
             <CardFooter>
               <div className="text-xs text-muted-foreground font-medium flex items-center gap-2">
-                <Flower2 className="text-accent/80" size={16} />
+                <Flower className="text-accent/80" size={16} />
                 <span>{item.flowers} flowers bloomed</span>
               </div>
             </CardFooter>
