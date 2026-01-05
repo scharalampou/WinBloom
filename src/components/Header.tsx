@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 
 export function Header() {
   return (
-    <header className="border-b border-border dark:border-[#51637C] sticky top-0 bg-background z-10">
+    <header className="border-b sticky top-0 bg-background z-10">
       <div className={cn("container mx-auto px-4 flex items-center justify-between", "py-6")}>
         {/* Mobile Nav */}
         <div className="md:hidden">

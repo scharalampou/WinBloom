@@ -147,7 +147,7 @@ export function WinBloomDashboard() {
     <div className="space-y-6">
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         <div className="lg:col-span-2 space-y-6">
-          <Card className="dark:border-[#51637C]">
+          <Card>
             <CardHeader className="flex-row items-center justify-between">
               <div className="space-y-1.5">
                 <CardTitle className="font-headline">Dewdrop Balance</CardTitle>
@@ -159,7 +159,7 @@ export function WinBloomDashboard() {
               </div>
             </CardHeader>
           </Card>
-          <Card className="dark:border-[#51637C]">
+          <Card>
             <CardHeader>
               <CardTitle className="font-headline">Cultivate Your Day</CardTitle>
               <CardDescription>Log a win and something you're grateful for.</CardDescription>
@@ -269,7 +269,7 @@ export function WinBloomDashboard() {
             </CardContent>
           </Card>
         </div>
-        <Card className="lg:col-span-3 flex flex-col dark:border-[#51637C]" style={{ borderWidth: '1.5px' }}>
+        <Card className="lg:col-span-3 flex flex-col">
           <CardHeader>
             <CardTitle className="font-headline">Your Digital Garden</CardTitle>
             <CardDescription>Watch your garden grow with every win you log.</CardDescription>
