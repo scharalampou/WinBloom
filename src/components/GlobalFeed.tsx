@@ -3,6 +3,7 @@
 
 import { exampleWins } from '@/app/lib/mock-data';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import { Sparkles } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export function GlobalFeed() {
@@ -25,8 +26,8 @@ export function GlobalFeed() {
           <Card key={index} className="flex flex-col transition-transform duration-300 hover:-translate-y-1">
             <CardHeader>
               <CardTitle className="flex items-center gap-3">
-                <span className="bg-secondary p-2 rounded-full text-xl">
-                  🎉
+                <span className="bg-secondary p-2 rounded-full">
+                  <Sparkles className="text-primary" />
                 </span>
                 <span className="text-base font-body pt-1 font-medium text-muted-foreground">{item.user}</span>
               </CardTitle>
