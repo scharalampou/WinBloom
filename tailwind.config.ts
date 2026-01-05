@@ -21,7 +21,7 @@ export default {
       },
       fontFamily: {
         body: ['PT Sans', 'sans-serif'],
-        headline: ['Frank Ruhl Libre', 'serif'],
+        headline: ['Josefin Slab', 'serif'],
         code: ['monospace'],
       },
       colors: {
