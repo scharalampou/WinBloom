@@ -5,10 +5,10 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { RefreshCw } from 'lucide-react';
-import { quotes } from '@/app/lib/quotes';
+import { quotes, type Quote } from '@/app/lib/quotes';
 
 export function DailyInspiration() {
-  const [quote, setQuote] = useState<string>('');
+  const [quote, setQuote] = useState<Quote | null>(null);
 
   const getRandomQuote = () => {
     const randomIndex = Math.floor(Math.random() * quotes.length);
@@ -26,9 +26,18 @@ export function DailyInspiration() {
         <div className="flex items-start gap-4">
           <div className="flex-grow">
             <p className="font-headline text-lg mb-2">Daily Inspiration</p>
-            <blockquote className="italic text-base">
-              {quote ? `“${quote}”` : "Loading your daily dose of inspiration..."}
-            </blockquote>
+            {quote ? (
+              <figure>
+                <blockquote className="italic text-base">
+                  “{quote.quote}”
+                </blockquote>
+                <figcaption className="text-right text-sm mt-2 font-medium">— {quote.source}</figcaption>
+              </figure>
+            ) : (
+              <blockquote className="italic text-base">
+                Loading your daily dose of inspiration...
+              </blockquote>
+            )}
           </div>
           <Button
             variant="ghost"
