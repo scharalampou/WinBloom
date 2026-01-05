@@ -166,14 +166,14 @@ export function WinBloomDashboard() {
                         Your progress to the next flower:
                     </p>
                     <div className="relative w-full h-8 flex items-center">
-                        <Progress value={progressToNextFlower} className="h-2" indicatorClassName={theme === 'light' ? 'bg-[#3D8E73]' : ''} />
+                        <Progress value={progressToNextFlower} className="h-2" indicatorClassName={isClient && theme === 'light' ? 'bg-[#3D8E73]' : ''} />
                         <div className="absolute top-1/2 -translate-y-1/2 w-full flex justify-between">
                             {Array.from({ length: 7 }).map((_, i) => (
                                 <div
                                     key={i}
                                     className={cn(
                                         "h-8 w-8 rounded-full flex items-center justify-center bg-secondary transition-colors duration-500",
-                                        i < currentProgressSteps ? (theme === 'light' ? 'bg-[#3D8E73]' : 'bg-primary') : 'bg-muted'
+                                        i < currentProgressSteps ? (isClient && theme === 'light' ? 'bg-[#3D8E73]' : 'bg-primary') : 'bg-muted'
                                     )}
                                     style={{
                                         transform: 'translateX(-50%)',
@@ -329,7 +329,7 @@ export function WinBloomDashboard() {
                        <p className="text-center text-lg italic font-medium text-muted-foreground max-w-xs mt-2">
                         Just {dewdropsForNextFlower} more Dewdrops to go until your next flower!
                       </p>
-                      <Progress value={progressToNextFlower} className="w-48 h-2 mt-2" indicatorClassName={theme === 'light' ? 'bg-[#3D8E73]' : ''}/>
+                      <Progress value={progressToNextFlower} className="w-48 h-2 mt-2" indicatorClassName={isClient && theme === 'light' ? 'bg-[#3D8E73]' : ''}/>
                     </>
                   )}
                 </div>
@@ -362,3 +362,5 @@ export function WinBloomDashboard() {
 }
 
   
+
+    
