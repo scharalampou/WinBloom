@@ -164,18 +164,19 @@ export function WinBloomDashboard() {
             {isClient ? (
                 <div className="space-y-2 pt-2">
                     <div className="relative w-full h-8 flex items-center">
-                        <Progress value={progressToNextFlower} className="h-2" indicatorClassName={theme === 'light' ? 'bg-[#3D8E73]' : ''} />
+                        <Progress value={progressToNextFlower} className="h-2" indicatorClassName={isClient && theme === 'light' ? 'bg-[#3D8E73]' : ''} />
                         <div className="absolute top-1/2 -translate-y-1/2 w-full flex justify-between">
                             {Array.from({ length: 7 }).map((_, i) => (
                                 <div
                                     key={i}
                                     className={cn(
-                                        "h-8 w-8 rounded-full flex items-center justify-center bg-secondary transition-colors duration-500",
-                                        i < currentProgressSteps ? (theme === 'light' ? 'bg-[#3D8E73]' : 'bg-primary') : 'bg-muted'
+                                        "h-8 w-8 rounded-full flex items-center justify-center transition-colors duration-500",
+                                        i < currentProgressSteps ? (isClient && theme === 'light' ? 'bg-[#3D8E73]' : 'bg-primary') : ''
                                     )}
+                                    style={i >= currentProgressSteps ? { backgroundColor: '#AAAAAA' } : {}}
                                 >
                                     {i < 6 ? (
-                                        <Droplets className={cn("size-5", i < currentProgressSteps ? 'text-primary-foreground' : 'text-muted-foreground')} />
+                                        <Droplets className={cn("size-5", i < currentProgressSteps ? 'text-primary-foreground' : 'text-white')} />
                                     ) : (
                                       <span className={cn("text-2xl", i < currentProgressSteps ? '' : '')}>🌸</span>
                                     )}
@@ -368,4 +369,5 @@ export function WinBloomDashboard() {
     
 
     
+
 
