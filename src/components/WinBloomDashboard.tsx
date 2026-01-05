@@ -268,7 +268,7 @@ export function WinBloomDashboard() {
                   <>
                     <div className="w-full border-t border-border my-4"></div>
                     <p className="text-muted-foreground mb-4 font-headline text-lg">Your bloomed flowers</p>
-                    <div className="w-full grid grid-cols-7 gap-y-4 gap-x-2 items-center justify-center">
+                    <div className="w-full flex flex-wrap justify-center gap-x-2 gap-y-4">
                       {Array.from({ length: flowerCount }).map((_, i) => (
                         <div key={i} className="flex justify-center">
                           <span
@@ -290,5 +290,3 @@ export function WinBloomDashboard() {
     </div>
   );
 }
-
-    
