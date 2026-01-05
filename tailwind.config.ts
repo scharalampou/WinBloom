@@ -22,6 +22,7 @@ export default {
       fontFamily: {
         body: ['Montserrat', 'sans-serif'],
         headline: ['Josefin Slab', 'serif'],
+        sketch: ['"Cabin Sketch"', 'cursive'],
         code: ['monospace'],
       },
       colors: {

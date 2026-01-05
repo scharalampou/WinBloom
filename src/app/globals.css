@@ -33,20 +33,20 @@
     --card-foreground: 240 10% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    --primary: 338 80% 58%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 338 80% 95%;
-    --secondary-foreground: 338 80% 30%;
+    --primary: 45 93% 58%;
+    --primary-foreground: 240 10% 3.9%;
+    --secondary: 45 93% 95%;
+    --secondary-foreground: 45 93% 30%;
     --muted: 240 5% 96%;
     --muted-foreground: 240 12.32% 33.95%;
     --accent: 45 93% 58%;
     --accent-foreground: 240 10% 3.9%;
-    --destructive: 0 63% 91%;
-    --destructive-foreground: 0 84% 60%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
     --border: 224 71% 91%;
     --header-border: hsl(var(--border));
     --input: 220 13% 91%;
-    --ring: 338 80% 58%;
+    --ring: 45 93% 58%;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
@@ -61,6 +61,11 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --inspiration-1: 200 100% 90%;
+    --inspiration-2: 300 100% 90%;
+    --inspiration-3: 150 100% 90%;
+    --inspiration-4: 50 100% 90%;
   }
   .dark {
     --background: 222 47% 11%;
@@ -69,20 +74,25 @@
     --card-foreground: 0 0% 98%;
     --popover: 215 28% 17%;
     --popover-foreground: 0 0% 98%;
-    --primary: 338 80% 78%;
-    --primary-foreground: 338 80% 10%;
+    --primary: 45 93% 68%;
+    --primary-foreground: 45 93% 10%;
     --secondary: 252 14% 22%;
     --secondary-foreground: 0 0% 98%;
     --muted: 252 14% 22%;
     --muted-foreground: 240 5% 64.9%;
     --accent: 45 93% 68%;
     --accent-foreground: 240 10% 3.9%;
-    --destructive: 0 63% 91%;
-    --destructive-foreground: 0 84% 60%;
-    --border: 252 14% 22%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 252 14% 32%;
     --header-border: #51637C;
     --input: 252 14% 22%;
-    --ring: 338 80% 78%;
+    --ring: 45 93% 68%;
+
+    --inspiration-1: 200 50% 20%;
+    --inspiration-2: 300 50% 20%;
+    --inspiration-3: 150 50% 20%;
+    --inspiration-4: 50 50% 20%;
   }
 }
 
