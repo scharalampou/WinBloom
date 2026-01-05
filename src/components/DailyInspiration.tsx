@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -22,9 +21,9 @@ export function DailyInspiration() {
 
   return (
     <Card className="bg-primary text-primary-foreground">
-      <CardContent className="p-4 relative">
+      <CardContent className="p-4 relative text-center">
         <div className="text-center">
-          <p className="font-headline text-lg mb-2">Daily Inspiration</p>
+          <p className="font-headline text-lg mb-2 font-bold">Daily Inspiration</p>
           {quote ? (
             <figure>
               <blockquote className="italic text-base">
