@@ -31,6 +31,8 @@ const flowerColors = [
   "text-indigo-500", "text-violet-500", "text-purple-500", "text-fuchsia-500",
 ];
 
+type SuggestionField = 'win' | 'gratitude';
+
 export function WinBloomDashboard() {
   const [dewdrops, setDewdrops] = useState<number>(0);
   const [logs, setLogs] = useState<WinLog[]>([]);
@@ -38,6 +40,7 @@ export function WinBloomDashboard() {
   const [isPending, startTransition] = useTransition();
   const { toast } = useToast();
   const [lastFlowerToast, setLastFlowerToast] = useState(0);
+  const [suggestionTarget, setSuggestionTarget] = useState<SuggestionField | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -84,17 +87,12 @@ export function WinBloomDashboard() {
   const dewdropsForNextFlower = useMemo(() => 50 - (dewdrops % 50), [dewdrops]);
   const progressToNextFlower = useMemo(() => (50 - dewdropsForNextFlower) / 50 * 100, [dewdropsForNextFlower]);
 
-  const handleShuffle = () => {
+  const handleShuffle = (field: SuggestionField) => {
+    setSuggestionTarget(field);
     startTransition(async () => {
       const result = await getWinSuggestion();
       if (result.suggestion) {
-        if (Math.random() > 0.5) {
-            form.setValue('win', result.suggestion, { shouldValidate: true });
-            form.setValue('gratitude', '', { shouldValidate: false });
-        } else {
-            form.setValue('gratitude', result.suggestion, { shouldValidate: true });
-            form.setValue('win', '', { shouldValidate: false });
-        }
+        form.setValue(field, result.suggestion, { shouldValidate: true });
       } else {
         toast({
           variant: 'destructive',
@@ -102,6 +100,7 @@ export function WinBloomDashboard() {
           description: result.error,
         });
       }
+      setSuggestionTarget(null);
     });
   };
 
@@ -152,13 +151,13 @@ export function WinBloomDashboard() {
                       <FormItem>
                         <div className="flex justify-between items-center">
                           <FormLabel className="font-bold">Today's Win</FormLabel>
-                          <Button type="button" variant="ghost" size="sm" onClick={handleShuffle} disabled={isPending} aria-label="Suggest a win">
-                            {isPending ? (
+                          <Button type="button" variant="ghost" size="sm" onClick={() => handleShuffle('win')} disabled={isPending} aria-label="Suggest a win">
+                            {isPending && suggestionTarget === 'win' ? (
                               <Loader2 className="h-4 w-4 animate-spin" />
                             ) : (
                               <Wand2 className="h-4 w-4 text-accent" />
                             )}
-                            <span className="ml-2 hidden sm:inline">Suggestions...</span>
+                            <span className="ml-2 hidden sm:inline">Suggest</span>
                           </Button>
                         </div>
                         <FormControl>
@@ -173,7 +172,17 @@ export function WinBloomDashboard() {
                     name="gratitude"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="font-bold">Today's Gratitude</FormLabel>
+                         <div className="flex justify-between items-center">
+                          <FormLabel className="font-bold">Today's Gratitude</FormLabel>
+                          <Button type="button" variant="ghost" size="sm" onClick={() => handleShuffle('gratitude')} disabled={isPending} aria-label="Suggest a gratitude">
+                            {isPending && suggestionTarget === 'gratitude' ? (
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                            ) : (
+                              <Wand2 className="h-4 w-4 text-accent" />
+                            )}
+                            <span className="ml-2 hidden sm:inline">Suggest</span>
+                          </Button>
+                        </div>
                         <FormControl>
                           <Textarea placeholder="Grateful for the morning coffee..." {...field} />
                         </FormControl>
@@ -285,6 +294,5 @@ export function WinBloomDashboard() {
       <DailyInspiration />
     </div>
   );
-}
 
     
