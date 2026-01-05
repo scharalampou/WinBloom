@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useTransition } from 'react';
 import type { WinLog } from '@/app/lib/types';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Loader2, Leaf } from 'lucide-react';
@@ -13,9 +13,9 @@ import {
   parseISO,
   subDays,
   startOfToday,
-  startOfWeek,
 } from 'date-fns';
 import { Badge } from './ui/badge';
+import { Button } from './ui/button';
 
 const encouragingMessages = [
   "Even the earth needs a day of rest to bloom. See you tomorrow!",
@@ -54,28 +54,23 @@ const mockGratitudes = [
 
 const generateMockLogs = (count: number): WinLog[] => {
   const logs: WinLog[] = [];
-  const today = new Date(); // Use the actual current date
+  const today = new Date();
   let logCounter = 0;
   let dewdrops = 0;
   let lastFlowerBloomDewdrops = 0;
 
-  // We are generating logs in reverse chronological order (from today backwards)
-  // To correctly calculate flower bloom milestones, we should think as if we are adding them chronologically.
-  // So we'll build the array from oldest to newest, then reverse it.
   const tempLogs: WinLog[] = [];
 
   for (let i = count - 1; i >= 0; i--) {
       const date = subDays(today, i);
       const dateString = format(date, 'yyyy-MM-dd');
 
-      // Skip creating logs for Dec 25th and 26th of the current year for demonstration
       if (dateString.endsWith('-12-25') || dateString.endsWith('-12-26')) {
         continue;
       }
 
       dewdrops += 10;
       let flowerBloomed = false;
-      // 70 dewdrops to bloom a flower (i.e., every 7 logs)
       if (dewdrops > lastFlowerBloomDewdrops && dewdrops % 70 === 0) {
         flowerBloomed = true;
         lastFlowerBloomDewdrops = dewdrops;
@@ -91,7 +86,6 @@ const generateMockLogs = (count: number): WinLog[] => {
       logCounter++;
   }
   
-  // Reverse the array to have the newest logs first
   return tempLogs.reverse();
 };
 
@@ -99,22 +93,13 @@ const generateMockLogs = (count: number): WinLog[] => {
 export function GrowthHistory() {
   const [logs, setLogs] = useState<WinLog[]>([]);
   const [isClient, setIsClient] = useState(false);
+  const [visibleDays, setVisibleDays] = useState(7);
+  const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
     setIsClient(true);
-    // Use mock data for demonstration, generating data for the last 14 days to show a flower bloom
-    const mockLogs = generateMockLogs(14);
+    const mockLogs = generateMockLogs(30); // Generate more logs for lazy loading
     setLogs(mockLogs.sort((a, b) => parseISO(b.date).getTime() - parseISO(a.date).getTime()));
-    
-    // Previous localStorage logic:
-    // try {
-    //   const savedLogs = localStorage.getItem('winbloom-logs');
-    //   if (savedLogs) {
-    //     setLogs(JSON.parse(savedLogs).sort((a: WinLog, b: WinLog) => parseISO(b.date).getTime() - parseISO(a.date).getTime()));
-    //   }
-    // } catch (error) {
-    //   console.error("Failed to parse from localStorage", error);
-    // }
   }, []);
 
   const groupedLogs = useMemo(() => {
@@ -133,10 +118,9 @@ export function GrowthHistory() {
     const today = startOfToday();
 
     const filledGroups: Record<string, WinLog[] | { empty: true; messageIndex: number; }> = {};
-    if (logs.length > 0 || isClient) { // Ensure this runs even if logs are initially empty to show today's empty state
+    if (logs.length > 0 || isClient) {
       let currentDate = today;
-      // Go back a certain number of days to ensure we cover the test range
-      const oldestDate = logs.length > 0 ? parseISO(logs[logs.length-1].date) : subDays(today, 12); 
+      const oldestDate = logs.length > 0 ? parseISO(logs[logs.length-1].date) : subDays(today, 29); 
       
       let emptyCounter = 0;
       while (currentDate >= oldestDate) {
@@ -144,22 +128,18 @@ export function GrowthHistory() {
         if (groups[dateKey]) {
           filledGroups[dateKey] = groups[dateKey];
         } else {
-            // Fill empty days within the range
             filledGroups[dateKey] = { empty: true, messageIndex: emptyCounter++ };
         }
         currentDate = subDays(currentDate, 1);
       }
       
-      // Add any remaining older groups that might be outside the window
       Object.keys(groups).forEach(dateKey => {
         if (!filledGroups[dateKey]) {
           filledGroups[dateKey] = groups[dateKey];
         }
       });
-
     }
 
-    // Create a sorted array of keys to ensure chronological order
     const sortedKeys = Object.keys(filledGroups).sort((a, b) => parseISO(b).getTime() - parseISO(a).getTime());
     
     const orderedFilledGroups: Record<string, WinLog[] | { empty: true; messageIndex: number; }> = {};
@@ -167,9 +147,7 @@ export function GrowthHistory() {
         orderedFilledGroups[key] = filledGroups[key] as WinLog[] | { empty: true; messageIndex: number; };
     });
 
-
     return orderedFilledGroups;
-
   }, [logs, isClient]);
 
   const getGroupTitle = (dateKey: string) => {
@@ -179,6 +157,15 @@ export function GrowthHistory() {
     if (isThisWeek(date, { weekStartsOn: 1 })) return format(date, 'EEEE');
     return format(date, 'MMMM do');
   };
+
+  const handleLoadMore = () => {
+    startTransition(() => {
+      setVisibleDays(prev => prev + 7);
+    });
+  };
+
+  const dayEntries = useMemo(() => Object.entries(groupedLogs), [groupedLogs]);
+  const visibleDayEntries = useMemo(() => dayEntries.slice(0, visibleDays), [dayEntries, visibleDays]);
 
   return (
     <div className="space-y-8 max-w-4xl mx-auto">
@@ -190,8 +177,8 @@ export function GrowthHistory() {
       </div>
 
       <div className="space-y-8">
-        {isClient && Object.keys(groupedLogs).length > 0 ? (
-          Object.entries(groupedLogs).map(([dateKey, entries]) => (
+        {isClient && visibleDayEntries.length > 0 ? (
+          visibleDayEntries.map(([dateKey, entries]) => (
             <div key={dateKey} className="space-y-4">
               <h3 className="text-xl md:text-2xl font-bold font-headline text-foreground/90">
                 {getGroupTitle(dateKey)}
@@ -253,9 +240,22 @@ export function GrowthHistory() {
                 <Loader2 className="size-8 animate-spin text-primary" />
             </div>
         )}
+
+        {isClient && dayEntries.length > visibleDays && (
+          <div className="text-center">
+            <Button onClick={handleLoadMore} disabled={isPending}>
+              {isPending ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Loading...
+                </>
+              ) : (
+                'Load more entries'
+              )}
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );
 }
-
-    
