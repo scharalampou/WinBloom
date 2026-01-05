@@ -235,11 +235,13 @@ export function WinBloomDashboard() {
                   {isClient && logs.length > 0 ? (
                     logs.map(log => (
                       <div key={log.id} className="p-3 rounded-md border bg-muted/50">
-                        <p className="text-sm font-semibold flex items-center gap-2">
-                          <Sparkles className="size-4 text-accent" /> Win: <span className="font-normal text-muted-foreground">{log.win}</span>
+                        <p className="text-sm font-semibold flex items-start gap-2">
+                          <Sparkles className="size-4 text-accent mt-0.5 shrink-0" /> 
+                          <span>Win: <span className="font-normal text-muted-foreground">{log.win}</span></span>
                         </p>
-                        <p className="text-sm font-semibold flex items-center gap-2 mt-1">
-                          <Flower2 className="size-4 text-primary" /> Gratitude: <span className="font-normal text-muted-foreground">{log.gratitude}</span>
+                        <p className="text-sm font-semibold flex items-start gap-2 mt-1">
+                          <Flower2 className="size-4 text-primary mt-0.5 shrink-0" />
+                          <span>Gratitude: <span className="font-normal text-muted-foreground">{log.gratitude}</span></span>
                         </p>
                         <p className="text-xs text-muted-foreground mt-2">{format(new Date(log.date), "PPP")}</p>
                       </div>
