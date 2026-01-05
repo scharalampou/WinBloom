@@ -15,7 +15,6 @@ export default function Home() {
         <Header />
         <main className="container mx-auto px-4 pt-6 pb-8">
             <TabsContent value="garden" className="mt-6 space-y-6">
-              <DailyInspiration />
               <WinBloomDashboard />
             </TabsContent>
             <TabsContent value="history" className="mt-6 space-y-6">
