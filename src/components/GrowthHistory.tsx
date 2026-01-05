@@ -77,7 +77,7 @@ export function GrowthHistory() {
             <div className="mt-6 text-center">
               <Button onClick={handleLoadMore} disabled={isLoadingMore}>
                 {isLoadingMore && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                {isLoadingMore ? 'Loading...' : 'Load More'}
+                {isLoadingMore ? 'Loading...' : 'Load More Entries...'}
               </Button>
             </div>
           )}
