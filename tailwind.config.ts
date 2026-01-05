@@ -20,7 +20,7 @@ export default {
         'relaxed': '1.6',
       },
       fontFamily: {
-        body: ['PT Sans', 'sans-serif'],
+        body: ['Montserrat', 'sans-serif'],
         headline: ['Josefin Slab', 'serif'],
         code: ['monospace'],
       },
