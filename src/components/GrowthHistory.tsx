@@ -60,8 +60,8 @@ export function GrowthHistory() {
                       <span className="flex-1"><span className="font-semibold text-emerald-600 dark:text-primary">Win: </span>{log.win}</span>
                     </p>
                     <p className="text-sm flex items-start gap-2">
-                      <Heart className="h-5 w-5 text-orange-600 dark:text-accent mt-0.5 shrink-0" />
-                      <span className="flex-1"><span className="font-semibold text-orange-600 dark:text-accent">Gratitude: </span>{log.gratitude}</span>
+                      <Heart className="h-5 w-5 text-primary dark:text-accent mt-0.5 shrink-0" />
+                      <span className="flex-1"><span className="font-semibold text-primary dark:text-accent">Gratitude: </span>{log.gratitude}</span>
                     </p>
                   </div>
                   <p className="text-xs text-right mt-3 font-medium text-muted-foreground">{format(new Date(log.date), "PPP")}</p>
