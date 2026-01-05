@@ -269,7 +269,7 @@ export function WinBloomDashboard() {
             </CardContent>
           </Card>
         </div>
-        <Card className="lg:col-span-3 flex flex-col">
+        <Card className="lg:col-span-3 flex flex-col dark:border-[#51637C]" style={{ borderWidth: '1.5px' }}>
           <CardHeader>
             <CardTitle className="font-headline">Your Digital Garden</CardTitle>
             <CardDescription>Watch your garden grow with every win you log.</CardDescription>
