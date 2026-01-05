@@ -147,7 +147,7 @@ export function WinBloomDashboard() {
                   render={({ field }) => (
                     <FormItem>
                       <div className="flex justify-between items-center">
-                        <FormLabel>Today's Win</FormLabel>
+                        <FormLabel className="font-bold">Today's Win</FormLabel>
                       </div>
                       <FormControl>
                         <Textarea placeholder="Found matching socks..." {...field} />
@@ -161,7 +161,7 @@ export function WinBloomDashboard() {
                   name="gratitude"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Today's Gratitude</FormLabel>
+                      <FormLabel className="font-bold">Today's Gratitude</FormLabel>
                       <FormControl>
                         <Textarea placeholder="Grateful for the morning coffee..." {...field} />
                       </FormControl>
