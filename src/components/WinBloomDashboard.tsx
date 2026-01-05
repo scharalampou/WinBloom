@@ -138,6 +138,7 @@ export function WinBloomDashboard() {
 
   return (
     <div className="space-y-6">
+      <DailyInspiration />
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         <div className="lg:col-span-2 space-y-6">
           <Card>
@@ -309,9 +310,10 @@ export function WinBloomDashboard() {
           </CardContent>
         </Card>
       </div>
-      <DailyInspiration />
     </div>
   );
 }
+
+    
 
     
