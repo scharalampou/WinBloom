@@ -6,7 +6,7 @@ import { MobileNav } from './MobileNav';
 export function Header() {
   return (
     <header className="border-b sticky top-0 bg-background/95 z-10">
-      <div className="container mx-auto px-4 flex items-center justify-between h-16">
+      <div className="container mx-auto px-4 flex items-center justify-between py-6">
         {/* Mobile Nav */}
         <div className="md:hidden">
           <MobileNav />
