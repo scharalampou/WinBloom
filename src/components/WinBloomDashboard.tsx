@@ -100,6 +100,7 @@ export function WinBloomDashboard() {
   const flowerCount = useMemo(() => isClient ? Math.floor(dewdrops / 70) : 0, [dewdrops, isClient]);
   const dewdropsForNextFlower = useMemo(() => 70 - (dewdrops % 70), [dewdrops]);
   const progressToNextFlower = useMemo(() => (70 - dewdropsForNextFlower) / 70 * 100, [dewdropsForNextFlower]);
+  const currentProgressSteps = useMemo(() => isClient ? Math.floor((dewdrops % 70) / 10) : 0, [dewdrops, isClient]);
 
   const handleShuffle = (field: SuggestionField) => {
     setSuggestionTarget(field);
@@ -148,16 +149,47 @@ export function WinBloomDashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         <div className="lg:col-span-2 space-y-6">
           <Card className="dark:border-[#485971]">
-            <CardHeader className="flex-row items-center justify-between">
+            <CardHeader className="flex-row items-center justify-between pb-4">
               <div className="space-y-1.5">
                 <CardTitle className="font-headline">Dewdrop Balance</CardTitle>
-                <CardDescription>Earn 10 Dewdrops every time you Log your Growth!</CardDescription>
+                <CardDescription>Earn 10 Dewdrops for every win you log!</CardDescription>
               </div>
               <div className="flex items-center gap-2 text-4xl font-bold text-primary dark:text-accent">
                 <Droplets className="size-8" />
                 <span>{isClient ? dewdrops : 0}</span>
               </div>
             </CardHeader>
+            <CardContent>
+                <div className="space-y-2">
+                    <p className="text-sm font-medium text-muted-foreground">
+                        Your progress to the next flower:
+                    </p>
+                    <div className="relative w-full">
+                        <Progress value={progressToNextFlower} className="h-2" />
+                        <div className="absolute top-1/2 -translate-y-1/2 w-full flex justify-between">
+                            {Array.from({ length: 7 }).map((_, i) => (
+                                <div
+                                    key={i}
+                                    className={cn(
+                                        "h-4 w-4 rounded-full flex items-center justify-center bg-secondary transition-colors duration-500",
+                                        i < currentProgressSteps ? 'bg-primary' : 'bg-muted'
+                                    )}
+                                    style={{
+                                        transform: 'translateX(-50%)',
+                                        left: `${(i / 6) * 100}%`
+                                    }}
+                                >
+                                    {i < 6 ? (
+                                        <Droplets className={cn("size-2.5", i < currentProgressSteps ? 'text-primary-foreground' : 'text-muted-foreground')} />
+                                    ) : (
+                                      <span className={cn("text-xs", i < currentProgressSteps ? '' : 'opacity-40')}>🌸</span>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </CardContent>
           </Card>
           <Card className="dark:border-[#485971]">
             <CardHeader>
