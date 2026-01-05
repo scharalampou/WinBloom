@@ -76,8 +76,12 @@ export function GrowthHistory() {
           {isClient && logs.length > visibleCount && (
             <div className="mt-6 text-center">
               <Button onClick={handleLoadMore} disabled={isLoadingMore}>
-                {isLoadingMore && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                {isLoadingMore ? 'Loading...' : 'Load More Entries...'}
+                {isLoadingMore ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  <History className="mr-2 h-4 w-4" />
+                )}
+                {isLoadingMore ? 'Loading...' : 'Load More Entries'}
               </Button>
             </div>
           )}
