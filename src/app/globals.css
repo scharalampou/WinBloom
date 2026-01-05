@@ -44,6 +44,7 @@
     --destructive: 0 63% 91%;
     --destructive-foreground: 0 84% 60%;
     --border: 224 71% 91%;
+    --header-border: hsl(var(--border));
     --input: 220 13% 91%;
     --ring: 338 80% 58%;
     --chart-1: 12 76% 61%;
@@ -79,6 +80,7 @@
     --destructive: 0 63% 91%;
     --destructive-foreground: 0 84% 60%;
     --border: 252 14% 22%;
+    --header-border: #51637C;
     --input: 252 14% 22%;
     --ring: 338 80% 78%;
   }
