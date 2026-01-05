@@ -3,7 +3,7 @@ import { Header } from '@/components/Header';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { WinBloomDashboard } from '@/components/WinBloomDashboard';
 import { GlobalFeed } from '@/components/GlobalFeed';
-import { Sprout, Globe, History } from 'lucide-react';
+import { Sprout, Users, History } from 'lucide-react';
 import { DailyInspiration } from '@/components/DailyInspiration';
 import { GrowthHistory } from '@/components/GrowthHistory';
 
@@ -26,8 +26,8 @@ export default function Home() {
               Growth History
             </TabsTrigger>
             <TabsTrigger value="global">
-              <Globe className="mr-2 h-4 w-4" />
-              Bloom Feed
+              <Users className="mr-2 h-4 w-4" />
+              Community Feed
             </TabsTrigger>
           </TabsList>
           <TabsContent value="garden" className="mt-6">
