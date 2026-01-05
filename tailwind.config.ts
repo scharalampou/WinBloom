@@ -18,7 +18,7 @@ export default {
     extend: {
       fontFamily: {
         body: ['PT Sans', 'sans-serif'],
-        headline: ['Playfair Display', 'serif'],
+        headline: ['Frank Ruhl Libre', 'serif'],
         code: ['monospace'],
       },
       colors: {
