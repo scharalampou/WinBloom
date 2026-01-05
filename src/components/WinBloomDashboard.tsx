@@ -188,7 +188,7 @@ export function WinBloomDashboard() {
                             {isPending && suggestionTarget === 'win' ? (
                               <Loader2 className="h-4 w-4 animate-spin" />
                             ) : (
-                              <Sparkles className="h-4 w-4 text-accent" />
+                              <Sparkles className="h-4 w-4 text-primary dark:text-accent" />
                             )}
                             <span className="ml-1 hidden sm:inline">Suggest</span>
                           </Button>
@@ -235,7 +235,7 @@ export function WinBloomDashboard() {
                             {isPending && suggestionTarget === 'gratitude' ? (
                               <Loader2 className="h-4 w-4 animate-spin" />
                             ) : (
-                              <Sparkles className="h-4 w-4 text-accent" />
+                              <Sparkles className="h-4 w-4 text-primary dark:text-accent" />
                             )}
                             <span className="ml-1 hidden sm:inline">Suggest</span>
                           </Button>
