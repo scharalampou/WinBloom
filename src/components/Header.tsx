@@ -2,11 +2,12 @@ import { Leaf, Menu, Sprout, Users, History } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { TabsList, TabsTrigger } from './ui/tabs';
 import { MobileNav } from './MobileNav';
+import { cn } from '@/lib/utils';
 
 export function Header() {
   return (
-    <header className="border-b sticky top-0 bg-background/95 z-10">
-      <div className="container mx-auto px-4 flex items-center justify-between py-6">
+    <header className="border-b sticky top-0 bg-background/90 z-10">
+      <div className={cn("container mx-auto px-4 flex items-center justify-between", "py-6")}>
         {/* Mobile Nav */}
         <div className="md:hidden">
           <MobileNav />
