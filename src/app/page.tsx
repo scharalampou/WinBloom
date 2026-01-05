@@ -1,3 +1,4 @@
+
 import { Header } from '@/components/Header';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { WinBloomDashboard } from '@/components/WinBloomDashboard';
@@ -26,7 +27,7 @@ export default function Home() {
             </TabsTrigger>
             <TabsTrigger value="global">
               <Globe className="mr-2 h-4 w-4" />
-              Global Bloom Feed
+              Bloom Feed
             </TabsTrigger>
           </TabsList>
           <TabsContent value="garden" className="mt-6">
