@@ -151,11 +151,17 @@ export function WinBloomDashboard() {
                       <FormItem>
                         <div className="flex justify-between items-center">
                           <FormLabel className="font-bold">Today's Win</FormLabel>
-                          <Button type="button" variant="ghost" size="sm" onClick={() => handleShuffle('win')} disabled={isPending} aria-label="Suggest a win">
+                          <Button 
+                            type="button" 
+                            onClick={() => handleShuffle('win')} 
+                            disabled={isPending} 
+                            aria-label="Suggest a win"
+                            className="h-9 px-3 rounded-md border border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground group"
+                          >
                             {isPending && suggestionTarget === 'win' ? (
                               <Loader2 className="h-4 w-4 animate-spin" />
                             ) : (
-                              <Wand2 className="h-4 w-4 text-accent" />
+                              <Wand2 className="h-4 w-4 text-primary group-hover:text-primary-foreground" />
                             )}
                             <span className="ml-2 hidden sm:inline">Suggest</span>
                           </Button>
@@ -174,11 +180,17 @@ export function WinBloomDashboard() {
                       <FormItem>
                          <div className="flex justify-between items-center">
                           <FormLabel className="font-bold">Today's Gratitude</FormLabel>
-                          <Button type="button" variant="ghost" size="sm" onClick={() => handleShuffle('gratitude')} disabled={isPending} aria-label="Suggest a gratitude">
+                          <Button 
+                            type="button" 
+                            onClick={() => handleShuffle('gratitude')} 
+                            disabled={isPending} 
+                            aria-label="Suggest a gratitude"
+                            className="h-9 px-3 rounded-md border border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground group"
+                          >
                             {isPending && suggestionTarget === 'gratitude' ? (
                               <Loader2 className="h-4 w-4 animate-spin" />
                             ) : (
-                              <Wand2 className="h-4 w-4 text-accent" />
+                              <Wand2 className="h-4 w-4 text-primary group-hover:text-primary-foreground" />
                             )}
                             <span className="ml-2 hidden sm:inline">Suggest</span>
                           </Button>
@@ -287,5 +299,6 @@ export function WinBloomDashboard() {
     </div>
   );
 
+    
     
     
