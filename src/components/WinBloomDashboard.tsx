@@ -5,7 +5,7 @@ import { useState, useEffect, useTransition, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { Award, Droplets, Loader2, Sparkles, Sprout } from 'lucide-react';
+import { Droplets, Loader2, Sparkles, Sprout } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
@@ -167,7 +167,7 @@ export function WinBloomDashboard() {
                       <FormItem>
                         <div className="flex justify-between items-center">
                           <FormLabel className="flex items-center gap-2 font-bold text-sm md:text-base">
-                            <Award className="text-accent" />
+                            <span>🎉</span>
                             Today's Win
                           </FormLabel>
                           <Button 
@@ -199,7 +199,7 @@ export function WinBloomDashboard() {
                       <FormItem>
                          <div className="flex justify-between items-center">
                           <FormLabel className="flex items-center gap-2 font-bold text-sm md:text-base">
-                            <span className="text-primary">🌸</span>
+                            <span>🌸</span>
                             Today's Gratitude
                           </FormLabel>
                           <Button 
