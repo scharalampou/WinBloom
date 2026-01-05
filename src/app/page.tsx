@@ -2,8 +2,9 @@ import { Header } from '@/components/Header';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { WinBloomDashboard } from '@/components/WinBloomDashboard';
 import { GlobalFeed } from '@/components/GlobalFeed';
-import { Sprout, Globe } from 'lucide-react';
+import { Sprout, Globe, History } from 'lucide-react';
 import { DailyInspiration } from '@/components/DailyInspiration';
+import { GrowthHistory } from '@/components/GrowthHistory';
 
 export default function Home() {
   return (
@@ -14,10 +15,14 @@ export default function Home() {
           <DailyInspiration />
         </div>
         <Tabs defaultValue="garden" className="w-full">
-          <TabsList className="grid w-full max-w-md mx-auto grid-cols-2">
+          <TabsList className="grid w-full max-w-lg mx-auto grid-cols-3">
             <TabsTrigger value="garden" className="font-bold">
               <Sprout className="mr-2 h-4 w-4" />
               My Garden
+            </TabsTrigger>
+            <TabsTrigger value="history" className="font-bold">
+              <History className="mr-2 h-4 w-4" />
+              Growth History
             </TabsTrigger>
             <TabsTrigger value="global" className="font-bold">
               <Globe className="mr-2 h-4 w-4" />
@@ -26,6 +31,9 @@ export default function Home() {
           </TabsList>
           <TabsContent value="garden" className="mt-6">
             <WinBloomDashboard />
+          </TabsContent>
+          <TabsContent value="history" className="mt-6">
+            <GrowthHistory />
           </TabsContent>
           <TabsContent value="global" className="mt-6">
             <GlobalFeed />

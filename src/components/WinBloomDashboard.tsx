@@ -17,7 +17,6 @@ import type { WinLog } from '@/app/lib/types';
 import { cn, format } from '@/lib/utils';
 import { ScrollArea } from './ui/scroll-area';
 import { Progress } from './ui/progress';
-import { DailyInspiration } from './DailyInspiration';
 
 const formSchema = z.object({
   win: z.string().min(3, "Your win needs a bit more detail!"),
@@ -223,37 +222,6 @@ export function WinBloomDashboard() {
                   </div>
                 </form>
               </Form>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle className="font-headline">Growth History</CardTitle>
-              <CardDescription>A log of your recent wins and gratitudes.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <ScrollArea className="h-64">
-                <div className="space-y-4 pr-4">
-                  {isClient && logs.length > 0 ? (
-                    logs.map(log => (
-                      <div key={log.id} className="p-3 rounded-md border bg-[#F7F4E6] border-[#F0EDDE] text-[#555555]">
-                        <p className="text-sm font-semibold flex items-start gap-2">
-                          <Sparkles className="size-4 text-accent mt-0.5 shrink-0" /> 
-                          <span className="flex-1">Win: <span className="font-normal">{log.win}</span></span>
-                        </p>
-                        <p className="text-sm font-semibold flex items-start gap-2 mt-1">
-                          <Flower2 className="size-4 text-primary mt-0.5 shrink-0" />
-                          <span className="flex-1">Gratitude: <span className="font-normal">{log.gratitude}</span></span>
-                        </p>
-                        <p className="text-xs mt-2">{format(new Date(log.date), "PPP")}</p>
-                      </div>
-                    ))
-                  ) : (
-                    <p className="text-sm text-muted-foreground text-center py-10">
-                      Your history will appear here once you start logging.
-                    </p>
-                  )}
-                </div>
-              </ScrollArea>
             </CardContent>
           </Card>
         </div>
