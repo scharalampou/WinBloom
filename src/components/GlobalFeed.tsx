@@ -3,7 +3,7 @@
 
 import { exampleWins } from '@/app/lib/mock-data';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { Sparkles } from 'lucide-react';
+import { Sprout } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export function GlobalFeed() {
@@ -27,7 +27,7 @@ export function GlobalFeed() {
             <CardHeader>
               <CardTitle className="flex items-center gap-3">
                 <span className="bg-secondary p-2 rounded-full text-xl">
-                  <Sparkles className="text-primary" />
+                  <Sprout className="text-primary" />
                 </span>
                 <span className="text-base font-body pt-1 font-medium text-muted-foreground">{item.user}</span>
               </CardTitle>
