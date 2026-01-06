@@ -60,43 +60,41 @@ export function BottomNav() {
 
 
   return (
-    <>
-      <div className={cn(
-        "fixed bottom-0 left-0 right-0 h-[calc(4.5rem+env(safe-area-inset-bottom))] bg-background/95 backdrop-blur-sm border-t",
-        "flex sm:hidden",
-        "justify-around pt-2 text-muted-foreground",
-        "pb-[env(safe-area-inset-bottom)]"
-      )}>
-        <TabsList className="grid grid-cols-4 w-full h-full bg-transparent p-0">
-          <TabsTrigger value="garden" className="flex-col h-full gap-1 data-[state=active]:text-white dark:data-[state=active]:text-[#121212] bg-transparent shadow-none border-none data-[state=active]:shadow-none data-[state=active]:rounded-none">
-            <Sprout className="size-6" />
-            <span className="text-xs font-semibold">My Garden</span>
-          </TabsTrigger>
-          <TabsTrigger value="history" className="flex-col h-full gap-1 data-[state=active]:text-white dark:data-[state=active]:text-[#121212] bg-transparent shadow-none border-none data-[state=active]:shadow-none data-[state=active]:rounded-none">
-            <History className="size-6" />
-            <span className="text-xs font-semibold">My Growth</span>
-          </TabsTrigger>
-          <TabsTrigger value="global" className="flex-col h-full gap-1 data-[state=active]:text-white dark:data-[state=active]:text-[#121212] bg-transparent shadow-none border-none data-[state=active]:shadow-none data-[state=active]:rounded-none">
-            <Users className="size-6" />
-            <span className="text-xs font-semibold">Feed</span>
-          </TabsTrigger>
+    <div className={cn(
+      "fixed bottom-0 left-0 right-0 h-[calc(4.5rem+env(safe-area-inset-bottom))] bg-background/95 backdrop-blur-sm border-t",
+      "flex sm:hidden", // Default to flex, hidden on sm and up
+      "justify-around pt-2 text-muted-foreground",
+      "pb-[env(safe-area-inset-bottom)]"
+    )}>
+      <TabsList className="grid grid-cols-4 w-full h-full bg-transparent p-0">
+        <TabsTrigger value="garden" className="flex-col h-full gap-1 data-[state=active]:text-white dark:data-[state=active]:text-[#121212] bg-transparent shadow-none border-none data-[state=active]:shadow-none data-[state=active]:rounded-none">
+          <Sprout className="size-6" />
+          <span className="text-xs font-semibold">My Garden</span>
+        </TabsTrigger>
+        <TabsTrigger value="history" className="flex-col h-full gap-1 data-[state=active]:text-white dark:data-[state=active]:text-[#121212] bg-transparent shadow-none border-none data-[state=active]:shadow-none data-[state=active]:rounded-none">
+          <History className="size-6" />
+          <span className="text-xs font-semibold">My Growth</span>
+        </TabsTrigger>
+        <TabsTrigger value="global" className="flex-col h-full gap-1 data-[state=active]:text-white dark:data-[state=active]:text-[#121212] bg-transparent shadow-none border-none data-[state=active]:shadow-none data-[state=active]:rounded-none">
+          <Users className="size-6" />
+          <span className="text-xs font-semibold">Feed</span>
+        </TabsTrigger>
 
-          <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
-            <DialogTrigger asChild>
-                <div className="flex flex-col items-center justify-center h-full gap-1 text-[#EA3E7D] dark:text-primary">
-                    <Plus className="size-6" />
-                    <span className="text-xs font-semibold">Log +</span>
-                </div>
-            </DialogTrigger>
-            <DialogContent className="max-w-[420px]">
-              <DialogHeader>
-                <DialogTitle>Cultivate Your Day</DialogTitle>
-              </DialogHeader>
-              <WinForm onWinLog={handleWinLog} />
-            </DialogContent>
-          </Dialog>
-        </TabsList>
-      </div>
-    </>
+        <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
+          <DialogTrigger asChild>
+            <div className="flex flex-col items-center justify-center h-full gap-1 text-[#EA3E7D] dark:text-primary">
+              <Plus className="size-6" />
+              <span className="text-xs font-semibold">Log A Win</span>
+            </div>
+          </DialogTrigger>
+          <DialogContent className="max-w-[420px]">
+            <DialogHeader>
+              <DialogTitle>Cultivate Your Day</DialogTitle>
+            </DialogHeader>
+            <WinForm onWinLog={handleWinLog} />
+          </DialogContent>
+        </Dialog>
+      </TabsList>
+    </div>
   );
 }
