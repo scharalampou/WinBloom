@@ -33,7 +33,7 @@ export function GardenDisplay({
     return (
         <>
             {showConfetti && <ConfettiBurst />}
-            <div className="lg:col-span-3 space-y-6">
+            <div className="space-y-6">
                 <Card>
                     <CardHeader className="flex-row items-center justify-between pb-4">
                         <div className="space-y-1.5">
