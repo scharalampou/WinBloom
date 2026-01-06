@@ -63,19 +63,20 @@ export function BottomNav() {
     <>
       <div className={cn(
         "fixed bottom-0 left-0 right-0 h-[calc(4.5rem+env(safe-area-inset-bottom))] bg-background/95 backdrop-blur-sm border-t",
-        "flex items-start justify-around pt-2 text-muted-foreground",
-        "pb-[env(safe-area-inset-bottom)] sm:hidden"
+        "flex sm:hidden", // visible on small screens, hidden on sm and up
+        "justify-around pt-2 text-muted-foreground",
+        "pb-[env(safe-area-inset-bottom)]"
       )}>
         <TabsList className="grid grid-cols-4 w-full h-full bg-transparent p-0">
-          <TabsTrigger value="garden" className="flex-col h-full gap-1 data-[state=active]:text-white bg-transparent shadow-none border-none data-[state=active]:shadow-none">
+          <TabsTrigger value="garden" className="flex-col h-full gap-1 data-[state=active]:text-white bg-transparent shadow-none border-none data-[state=active]:shadow-none data-[state=active]:rounded-none">
             <Sprout className="size-6" />
             <span className="text-xs font-semibold">My Garden</span>
           </TabsTrigger>
-          <TabsTrigger value="history" className="flex-col h-full gap-1 data-[state=active]:text-white bg-transparent shadow-none border-none data-[state=active]:shadow-none">
+          <TabsTrigger value="history" className="flex-col h-full gap-1 data-[state=active]:text-white bg-transparent shadow-none border-none data-[state=active]:shadow-none data-[state=active]:rounded-none">
             <History className="size-6" />
             <span className="text-xs font-semibold">My Growth</span>
           </TabsTrigger>
-          <TabsTrigger value="global" className="flex-col h-full gap-1 data-[state=active]:text-white bg-transparent shadow-none border-none data-[state=active]:shadow-none">
+          <TabsTrigger value="global" className="flex-col h-full gap-1 data-[state=active]:text-white bg-transparent shadow-none border-none data-[state=active]:shadow-none data-[state=active]:rounded-none">
             <Users className="size-6" />
             <span className="text-xs font-semibold">Feed</span>
           </TabsTrigger>
