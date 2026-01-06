@@ -9,7 +9,7 @@ export function Header() {
     <header className="border-b sticky top-0 bg-background z-10 border-border">
       <div className={cn("container mx-auto px-4 flex items-center justify-between", "py-6")}>
         {/* Mobile Nav */}
-        <div className="xs:hidden">
+        <div className="hidden xs:block md:hidden">
           <MobileNav />
         </div>
 
