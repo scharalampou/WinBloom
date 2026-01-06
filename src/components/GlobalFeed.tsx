@@ -1,3 +1,4 @@
+
 "use client";
 
 import { exampleWins, type ExampleWin } from '@/app/lib/mock-data';
@@ -71,21 +72,23 @@ export function GlobalFeed() {
               data-ai-hint="misty forest"
             />
           <div className="absolute inset-0 bg-black/50" />
-          <CardHeader className="relative z-10 text-white">
-            <CardTitle className="font-headline text-lg font-bold">Daily Spotlight</CardTitle>
-          </CardHeader>
-          <CardContent className="relative z-10 text-white min-h-[150px] flex items-center justify-center">
-            {dailySpotlight.type === 'quote' ? (
-              <figure className="text-center p-4">
-                <blockquote className="font-sketch text-2xl md:text-3xl font-normal italic">
-                  “{dailySpotlight.quote}”
-                </blockquote>
-                <figcaption className="text-center text-lg mt-4 font-medium opacity-90">— {dailySpotlight.source}</figcaption>
-              </figure>
-            ) : (
-              <p className="text-xl md:text-2xl italic">"{dailySpotlight.win}"</p>
-            )}
-          </CardContent>
+          <div className="relative text-white">
+            <CardHeader>
+              <CardTitle className="font-headline text-lg font-bold">Daily Spotlight</CardTitle>
+            </CardHeader>
+            <CardContent className="min-h-[150px] flex items-center justify-center">
+              {dailySpotlight.type === 'quote' ? (
+                <figure className="text-center p-4">
+                  <blockquote className="font-sketch text-2xl md:text-3xl font-normal italic">
+                    “{dailySpotlight.quote}”
+                  </blockquote>
+                  <figcaption className="text-center text-lg mt-4 font-medium opacity-90">— {dailySpotlight.source}</figcaption>
+                </figure>
+              ) : (
+                <p className="text-xl md:text-2xl italic">"{dailySpotlight.win}"</p>
+              )}
+            </CardContent>
+          </div>
         </Card>
       )}
       
