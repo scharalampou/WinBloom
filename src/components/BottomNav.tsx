@@ -83,10 +83,8 @@ export function BottomNav() {
 
           <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
             <DialogTrigger asChild>
-                <div className="flex flex-col items-center justify-start h-full gap-1 text-primary pt-1.5">
-                    <div className="flex items-center justify-center size-10 rounded-full bg-primary text-primary-foreground shadow-lg -translate-y-1.5">
-                        <Plus className="size-8" />
-                    </div>
+                <div className="flex flex-col items-center justify-center h-full gap-1 text-primary">
+                    <Plus className="size-6" />
                     <span className="text-xs font-semibold">Log +</span>
                 </div>
             </DialogTrigger>
