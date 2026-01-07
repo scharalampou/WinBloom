@@ -13,6 +13,7 @@ interface GardenDisplayProps {
     dewdrops: number;
     progressToNextFlower: number;
     currentProgressSteps: number;
+    stepsForNextFlower: number;
     dewdropsForNextFlower: number;
     flowerCount: number;
     logCount: number;
@@ -22,14 +23,18 @@ export function GardenDisplay({
     dewdrops,
     progressToNextFlower,
     currentProgressSteps,
+    stepsForNextFlower,
     dewdropsForNextFlower,
     flowerCount,
     logCount,
 }: GardenDisplayProps) {
     const { theme } = useTheme();
     const { width = 0, height = 0 } = useWindowSize();
-    const showConfetti = dewdrops > 0 && dewdrops % 70 === 0 && logCount > 0;
-
+    
+    // Confetti logic now depends on the dynamic flower cost
+    const costOfCurrentFlower = dewdropsForNextFlower + (dewdrops % (stepsForNextFlower * 10));
+    const showConfetti = dewdrops > 0 && flowerCount > 0 && dewdrops % costOfCurrentFlower === 0 && logCount > 0;
+    
     return (
         <>
             {showConfetti && <ConfettiBurst />}
@@ -50,7 +55,7 @@ export function GardenDisplay({
                             <div className="relative w-full h-8 flex items-center">
                                 <Progress value={progressToNextFlower} className="h-2" indicatorClassName={theme === 'light' ? 'bg-[#3D8E73]' : ''} />
                                 <div className="absolute top-1/2 -translate-y-1/2 w-full flex justify-between">
-                                    {Array.from({ length: 7 }).map((_, i) => (
+                                    {Array.from({ length: stepsForNextFlower }).map((_, i) => (
                                         <div
                                             key={i}
                                             className={cn(
@@ -59,11 +64,11 @@ export function GardenDisplay({
                                             )}
                                             style={
                                                 i >= currentProgressSteps
-                                                    ? (i === 6 ? { backgroundColor: '#121212' } : { backgroundColor: '#AAAAAA' })
+                                                    ? (i === (stepsForNextFlower - 1) ? { backgroundColor: '#121212' } : { backgroundColor: '#AAAAAA' })
                                                     : {}
                                             }
                                         >
-                                            {i < 6 ? (
+                                            {i < (stepsForNextFlower - 1) ? (
                                                 <Droplets className={cn("size-5", i < currentProgressSteps ? 'text-primary-foreground' : 'text-white')} />
                                             ) : (
                                                 <span className={cn("text-2xl", i < currentProgressSteps ? '' : '')}>🌸</span>

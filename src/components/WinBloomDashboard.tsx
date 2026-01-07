@@ -21,12 +21,71 @@ const wittyHeadlines = [
   "You're doing the thing! Keep going. 🚀",
 ];
 
+const LEVEL_CONFIG = [
+  { flowers: 3, cost: 30 }, // 1-3
+  { flowers: 3, cost: 40 }, // 4-6
+  { flowers: 3, cost: 50 }, // 7-9
+  { flowers: 3, cost: 60 }, // 10-12
+];
+const MAX_COST = 70;
+
+const calculateFlowerGrowth = (dewdrops: number) => {
+  let flowerCount = 0;
+  let remainingDewdrops = dewdrops;
+  let costForNextFlower = LEVEL_CONFIG[0].cost;
+
+  for (const level of LEVEL_CONFIG) {
+    const dewdropsForLevel = level.flowers * level.cost;
+    if (remainingDewdrops >= dewdropsForLevel) {
+      remainingDewdrops -= dewdropsForLevel;
+      flowerCount += level.flowers;
+    } else {
+      const flowersInLevel = Math.floor(remainingDewdrops / level.cost);
+      flowerCount += flowersInLevel;
+      remainingDewdrops -= flowersInLevel * level.cost;
+      costForNextFlower = level.cost;
+      break;
+    }
+    costForNextFlower = LEVEL_CONFIG[LEVEL_CONFIG.indexOf(level) + 1]?.cost ?? MAX_COST;
+  }
+  
+  if (remainingDewdrops >= costForNextFlower) {
+      const flowersInMaxLevel = Math.floor(remainingDewdrops / MAX_COST);
+      flowerCount += flowersInMaxLevel;
+      remainingDewdrops -= flowersInMaxLevel * MAX_COST;
+      costForNextFlower = MAX_COST;
+  }
+
+  const dewdropsForNextFlower = costForNextFlower - remainingDewdrops;
+  const progressToNextFlower = (remainingDewdrops / costForNextFlower) * 100;
+  const currentProgressSteps = Math.floor(remainingDewdrops / 10);
+  const stepsForNextFlower = Math.ceil(costForNextFlower / 10);
+  
+  return {
+    flowerCount,
+    dewdropsForNextFlower,
+    progressToNextFlower,
+    currentProgressSteps,
+    stepsForNextFlower,
+  };
+};
+
 export function WinBloomDashboard() {
   const [dewdrops, setDewdrops] = useState<number>(0);
   const [logs, setLogs] = useState<WinLog[]>([]);
   const [isClient, setIsClient] = useState(false);
   const { toast } = useToast();
-  const [lastFlowerToast, setLastFlowerToast] = useState(0);
+  const [lastFlowerToastCount, setLastFlowerToastCount] = useState(0);
+
+  const {
+    flowerCount,
+    dewdropsForNextFlower,
+    progressToNextFlower,
+    currentProgressSteps,
+    stepsForNextFlower
+  } = useMemo(() => isClient ? calculateFlowerGrowth(dewdrops) : {
+    flowerCount: 0, dewdropsForNextFlower: 30, progressToNextFlower: 0, currentProgressSteps: 0, stepsForNextFlower: 3
+  }, [dewdrops, isClient]);
 
   useEffect(() => {
     setIsClient(true);
@@ -36,7 +95,8 @@ export function WinBloomDashboard() {
       if (savedDewdrops) {
         const parsedDewdrops = JSON.parse(savedDewdrops);
         setDewdrops(parsedDewdrops);
-        setLastFlowerToast(Math.floor(parsedDewdrops / 70) * 70);
+        const initialGrowth = calculateFlowerGrowth(parsedDewdrops);
+        setLastFlowerToastCount(initialGrowth.flowerCount);
       }
       if (savedLogs) setLogs(JSON.parse(savedLogs));
     } catch (error) {
@@ -47,8 +107,7 @@ export function WinBloomDashboard() {
   useEffect(() => {
     if (isClient) {
       localStorage.setItem('winbloom-dewdrops', JSON.stringify(dewdrops));
-      const newFlowerMilestone = Math.floor(dewdrops / 70) * 70;
-      if (dewdrops > 0 && newFlowerMilestone > lastFlowerToast && newFlowerMilestone > 0) {
+      if (flowerCount > lastFlowerToastCount) {
         toast({
           className: "bg-primary text-primary-foreground border-none",
           title: (
@@ -60,10 +119,10 @@ export function WinBloomDashboard() {
           description: "Your garden is flourishing!",
           duration: 10000,
         });
-        setLastFlowerToast(newFlowerMilestone);
+        setLastFlowerToastCount(flowerCount);
       }
     }
-  }, [dewdrops, isClient, toast, lastFlowerToast]);
+  }, [dewdrops, isClient, toast, flowerCount, lastFlowerToastCount]);
 
   useEffect(() => {
     if (isClient) {
@@ -71,11 +130,6 @@ export function WinBloomDashboard() {
     }
   }, [logs, isClient]);
   
-  const flowerCount = useMemo(() => isClient ? Math.floor(dewdrops / 70) : 0, [dewdrops, isClient]);
-  const dewdropsForNextFlower = useMemo(() => 70 - (dewdrops % 70), [dewdrops]);
-  const progressToNextFlower = useMemo(() => (70 - dewdropsForNextFlower) / 70 * 100, [dewdropsForNextFlower]);
-  const currentProgressSteps = useMemo(() => isClient ? Math.floor((dewdrops % 70) / 10) : 0, [dewdrops, isClient]);
-
   const handleWinLog = (win: string, gratitude: string) => {
     const newLog: WinLog = {
       id: new Date().toISOString(),
@@ -112,6 +166,7 @@ export function WinBloomDashboard() {
             dewdrops={dewdrops}
             progressToNextFlower={progressToNextFlower}
             currentProgressSteps={currentProgressSteps}
+            stepsForNextFlower={stepsForNextFlower}
             dewdropsForNextFlower={dewdropsForNextFlower}
             flowerCount={flowerCount}
             logCount={logs.length}
